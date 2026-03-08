@@ -70,15 +70,7 @@ const app = {
         if (infoBox) infoBox.classList.add('hidden');
       }
 
-      if (!localStorage.getItem('ap2_welcome_dismissed_v2')) {
-        setTimeout(() => {
-          const welcomeModal = document.getElementById('welcomeModal');
-          if (welcomeModal) {
-            welcomeModal.classList.remove('hidden');
-            welcomeModal.style.display = 'flex';
-          }
-        }, 800);
-      }
+
 
       const quoteEl = document.getElementById('motivationQuote');
       if (quoteEl)
@@ -158,8 +150,8 @@ const app = {
 
   // --- TIMER ---
   updateCountdown() {
-    // Ziel: Sommerprüfung 2026 (28. April)
-    const target = new Date('2026-04-28T08:00:00');
+    // Ziel: Winterprüfung 2026 (25. November)
+    const target = new Date('2026-11-25T08:00:00');
     const now = new Date();
     const diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
     const el = document.getElementById('headerCountdown');
@@ -484,6 +476,46 @@ const app = {
   },
 
   // --- LEGAL / MODALS ---
+  openCheatSheet(topicId) {
+    const modal = document.getElementById('cheatSheetModal');
+    const contentBox = document.getElementById('cheatSheetContent');
+    const titleEl = document.getElementById('cheatSheetTitle');
+    const idEl = document.getElementById('cheatSheetId');
+
+    if (!modal) return;
+
+    const topic = this.findTopic(topicId);
+    if (topic) {
+      titleEl.textContent = topic.title;
+      idEl.textContent = topic.id;
+    }
+
+    const content = window.AP2_CONTENT ? window.AP2_CONTENT[topicId] : null;
+
+    if (content) {
+      contentBox.innerHTML = content;
+    } else {
+      contentBox.innerHTML = `
+        <div class="text-center py-10 opacity-70">
+          <i class="fa-solid fa-person-digging text-4xl mb-4 text-dark-warning"></i>
+          <h3 class="text-xl font-bold text-white mb-2">Inhalt folgt demnächst</h3>
+          <p>Der ausführliche Lernzettel für dieses Thema befindet sich noch in Bearbeitung.</p>
+        </div>
+      `;
+    }
+
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  },
+
+  closeCheatSheet() {
+    const modal = document.getElementById('cheatSheetModal');
+    if (modal) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  },
+
   openLegal(type) {
     const modal = document.getElementById('legalModal');
     const content = document.getElementById('legalContent');
@@ -545,19 +577,7 @@ const app = {
     document.getElementById('legalModal').classList.add('hidden');
   },
 
-  closeWelcomeModal() {
-    const modal = document.getElementById('welcomeModal');
-    if (modal) {
-      modal.classList.add('hidden');
-      // Zusätzliche Sicherheit: Pointer Events deaktivieren
-      modal.style.display = 'none';
-    }
-  },
 
-  dismissWelcomeModal() {
-    this.closeWelcomeModal();
-    localStorage.setItem('ap2_welcome_dismissed_v2', 'true');
-  },
 
   // --- RENDER ---
   updateStats() {
@@ -718,12 +738,22 @@ const app = {
           gl.href = `https://www.google.com/search?q=Fachinformatiker+AP2+FIAE+${encodeURIComponent(
             t.title
           )}`;
+          gl.onclick = (e) => e.stopPropagation();
         });
         const duckduckgoLink = node.querySelectorAll('.duckduckgo-link, .duckduckgo-link-mobile');
         duckduckgoLink.forEach((dl) => {
           dl.href = `https://www.duckduckgo.com/?q=Fachinformatiker+AP2+FIAE+${encodeURIComponent(
-              t.title
+            t.title
           )}`;
+          dl.onclick = (e) => e.stopPropagation();
+        });
+
+        const cheatsheetBtns = node.querySelectorAll('.cheatsheet-btn, .cheatsheet-btn-mobile');
+        cheatsheetBtns.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.openCheatSheet(t.id);
+          });
         });
 
         const wb = node.querySelector('.weight-badge');
@@ -755,14 +785,12 @@ const app = {
           li.className = 'flex items-start gap-3 text-xs text-dark-muted group/item transition-all';
           li.innerHTML = `
                   <div class="shrink-0 flex items-center justify-center w-5 h-5 relative">
-                      <input type="checkbox" class="peer appearance-none w-4 h-4 rounded border border-dark-border bg-dark-bg checked:bg-dark-accent checked:border-dark-accent cursor-pointer transition-colors" ${
-                        isDone ? 'checked' : ''
-                      }>
+                      <input type="checkbox" class="peer appearance-none w-4 h-4 rounded border border-dark-border bg-dark-bg checked:bg-dark-accent checked:border-dark-accent cursor-pointer transition-colors" ${isDone ? 'checked' : ''
+            }>
                       <i class="fa-solid fa-check text-[10px] text-white absolute pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity"></i>
                   </div>
-                  <span class="transition-colors cursor-pointer pt-0.5 ${
-                    isDone ? 'line-through opacity-50' : 'group-hover/item:text-white'
-                  }">${sub}</span>
+                  <span class="transition-colors cursor-pointer pt-0.5 ${isDone ? 'line-through opacity-50' : 'group-hover/item:text-white'
+            }">${sub}</span>
                 `;
           const subCb = li.querySelector('input');
           subCb.onclick = (e) => e.stopPropagation();
