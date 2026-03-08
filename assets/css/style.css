@@ -150,3 +150,47 @@ body {
     padding: 10px !important;
   }
 }
+
+/* Premium Lernzettel Styles */
+.lz-details {
+  border: 1px solid #1e293b;
+  border-radius: 0.75rem;
+  background-color: #0f172a;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+.lz-details[open] {
+  border-color: rgba(139, 92, 246, 0.4);
+  background-color: #020617;
+}
+.lz-details summary {
+  padding: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none; /* remove default arrow */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lz-details summary::-webkit-details-marker {
+  display: none;
+}
+.lz-details summary::after {
+  content: '\f078';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  transition: transform 0.2s ease;
+  color: #64748b;
+}
+.lz-details[open] summary::after {
+  transform: rotate(180deg);
+  color: #8b5cf6;
+}
+.lz-details .lz-content {
+  padding: 0 1rem 1rem 1rem;
+  color: #cbd5e1;
+  font-size: 0.875rem;
+  border-top: 1px solid #1e293b;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+}

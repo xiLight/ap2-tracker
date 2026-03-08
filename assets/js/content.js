@@ -4,638 +4,1118 @@
 // ----------------------------------------------------------------------
 
 window.AP2_CONTENT = {
-  // --- PB 1: Planen eines Softwareproduktes ---
-  '1.1': `
-    <h3>Vorgehensmodelle & Analyse</h3>
-    <p>Als Anwendungsentwickler musst du entscheiden, wie ein Softwareprojekt organisiert wird. Die Wahl des Vorgehensmodells bestimmt den gesamten Ablauf.</p>
-    
-    <h4>1. Scrum (Agil)</h4>
-    <ul>
-      <li><strong>Rollen:</strong> Product Owner (vertritt Kunden, priorisiert Backlog), Scrum Master (beseitigt Hindernisse, coacht), Developer (setzen um).</li>
-      <li><strong>Artefakte:</strong> Product Backlog (Alle Anforderungen), Sprint Backlog (Ziele für aktuellen Sprint), Increment (Lauffähiges Zwischenprodukt).</li>
-      <li><strong>Events:</strong> Sprint (Timebox, meist 2-4 Wochen), Daily Scrum (15 Min Update), Sprint Review (Demo für Stakeholder), Retrospektive (Prozessverbesserung).</li>
-    </ul>
+    // --- PB 1: Planen eines Softwareproduktes ---
+    '1.1': `
+<div class="space-y-8 pb-4">
+  <!-- Intro -->
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-dark-accent/20 flex items-center justify-center text-dark-accent">
+        <i class="fa-solid fa-code-branch"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Vorgehensmodelle & Analyse</h3>
+        <p class="text-sm text-dark-muted m-0">Organisation und Strukturierung von Softwareprojekten</p>
+      </div>
+    </div>
+    <p class="text-gray-300 leading-relaxed text-sm mb-4">
+      Als Anwendungsentwickler musst du entscheiden, wie ein Softwareprojekt organisiert wird. Die Wahl des Vorgehensmodells bestimmt den gesamten Ablauf.
+    </p>
+  </div>
 
-    <h4>2. Klassische Modelle</h4>
-    <ul>
-      <li><strong>Wasserfall:</strong> Strenge Phasen (Analyse &rarr; Design &rarr; Implementierung &rarr; Test &rarr; Betrieb). Ein Schritt muss abgeschlossen sein, bevor der nächste beginnt. Schlecht bei unklaren Anforderungen.</li>
-      <li><strong>V-Modell (XT):</strong> Wie Wasserfall, aber jede Entwicklungsphase hat eine direkte Testphase gegenüber (Validierung & Verifikation). Standard bei Behörden.</li>
-      <li><strong>Spiralmodell:</strong> Iterativ mit starkem Fokus auf <strong>Risikoanalyse</strong> in jedem Zyklus.</li>
-    </ul>
+  <!-- Grid: Agil vs Klassisch -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Scrum -->
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 hover:border-dark-accent/50 transition-colors flex flex-col h-full">
+      <div class="flex items-center justify-between mb-4">
+        <h4 class="text-lg font-bold text-white flex items-center gap-2 m-0">
+          <i class="fa-solid fa-rotate text-dark-success"></i> 1. Scrum (Agil)
+        </h4>
+        <span class="bg-dark-success/10 border border-dark-success/30 text-dark-success px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Modern</span>
+      </div>
+      <div class="space-y-4 flex-grow">
+        <div>
+          <span class="text-xs font-bold text-dark-muted uppercase">Rollen</span>
+          <p class="text-sm text-gray-300 mt-1"><strong>Product Owner</strong> (vertritt Kunden), <strong>Scrum Master</strong> (coacht, beseitigt Hindernisse), <strong>Developer</strong> (setzen um).</p>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-dark-muted uppercase">Artefakte</span>
+          <p class="text-sm text-gray-300 mt-1"><strong>Product Backlog</strong> (Wunschliste), <strong>Sprint Backlog</strong> (Aktueller Sprint), <strong>Increment</strong> (Lauffähiges Zwischenprodukt).</p>
+        </div>
+        <div>
+          <span class="text-xs font-bold text-dark-muted uppercase">Events</span>
+          <p class="text-sm text-gray-300 mt-1">Sprint (2-4 Wochen), Daily Scrum (15 Min), Sprint Review (Demo), Retrospektive.</p>
+        </div>
+      </div>
+    </div>
 
-    <h4>3. Anforderungsmanagement (Requirements Engineering)</h4>
-    <ul>
-      <li><strong>Lastenheft:</strong> Was will der Kunde? (Vom Auftraggeber erstellt).</li>
-      <li><strong>Pflichtenheft:</strong> Wie setzen wir es um? (Vom Auftragnehmer erstellt, Basis für den Vertrag).</li>
-      <li><strong>User Stories:</strong> "Als [Rolle] möchte ich [Ziel/Fähigkeit], um [Nutzen]." - Dient als Diskussionsgrundlage.</li>
-      <li><strong>Use Cases:</strong> Detaillierte Beschreibung der Interaktion zwischen Akteur und System (inkl. Vorbedingungen, Standardablauf, Alternativen).</li>
-    </ul>
+    <!-- Klassisch -->
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 hover:border-dark-accent/50 transition-colors flex flex-col h-full">
+      <div class="flex items-center justify-between mb-4">
+        <h4 class="text-lg font-bold text-white flex items-center gap-2 m-0">
+          <i class="fa-solid fa-water text-blue-400"></i> 2. Klassische Modelle
+        </h4>
+        <span class="bg-blue-400/10 border border-blue-400/30 text-blue-400 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Traditionell</span>
+      </div>
+      <div class="space-y-4 flex-grow">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Wasserfall</strong>
+          <p class="text-xs text-gray-400">Strenge Phasen (Analyse &rarr; Design &rarr; Implementierung &rarr; Test &rarr; Betrieb). Ein Schritt muss abgeschlossen sein, bevor der nächste beginnt.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">V-Modell (XT)</strong>
+          <p class="text-xs text-gray-400">Jede Entwicklungsphase hat eine direkte Testphase gegenüber. Standard bei Behörden.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Spiralmodell</strong>
+          <p class="text-xs text-gray-400">Iterativ mit starkem Fokus auf <span class="text-dark-warning font-bold">Risikoanalyse</span> in jedem Zyklus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <h4>4. Wirtschaftlichkeit & Analyse</h4>
-    <ul>
-      <li><strong>Nutzwertanalyse:</strong> Quantifizierung nicht-monetärer Kriterien (z.B. Benutzerfreundlichkeit, Skalierbarkeit) durch Gewichtung.</li>
-      <li><strong>TCO (Total Cost of Ownership):</strong> Alle Kosten über den gesamten Lebenszyklus (Anschaffung, Betrieb, Wartung, Schulungen).</li>
-      <li><strong>Make-or-Buy:</strong> Entscheidung, ob Software selbst entwickelt oder gekauft (COTS - Commercial Off-The-Shelf) wird.</li>
-    </ul>
+  <!-- Requirements -->
+  <details class="lz-details">
+    <summary>3. Anforderungsmanagement (Requirements Engineering)</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="flex items-start gap-3">
+        <i class="fa-solid fa-file-contract text-dark-accent mt-1"></i>
+        <div>
+          <strong class="text-white block">Lastenheft</strong>
+          <p class="text-xs mt-1 text-gray-400">Was will der Kunde? (Vom Auftraggeber erstellt).</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <i class="fa-solid fa-list-check text-dark-success mt-1"></i>
+        <div>
+          <strong class="text-white block">Pflichtenheft</strong>
+          <p class="text-xs mt-1 text-gray-400">Wie setzen wir es um? (Vom Auftragnehmer erstellt, Basis für den Vertrag).</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <i class="fa-regular fa-user text-blue-400 mt-1"></i>
+        <div>
+          <strong class="text-white block">User Stories</strong>
+          <p class="text-xs mt-1 text-gray-400">"Als [Rolle] möchte ich [Ziel], um [Nutzen]."</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <i class="fa-solid fa-sitemap text-dark-warning mt-1"></i>
+        <div>
+          <strong class="text-white block">Use Cases</strong>
+          <p class="text-xs mt-1 text-gray-400">Detaillierte Beschreibung der Interaktion zwischen Akteur und System.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- Wirtschaflickheit -->
+  <details class="lz-details">
+    <summary>4. Wirtschaftlichkeit & Analyse</summary>
+    <div class="lz-content space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-dark-accent"></span>
+        <strong class="text-white text-sm w-32 shrink-0">Nutzwertanalyse:</strong>
+        <span class="text-xs text-gray-400">Quantifizierung nicht-monetärer Kriterien (Benutzerfreundlichkeit) durch Gewichtung.</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-dark-success"></span>
+        <strong class="text-white text-sm w-32 shrink-0">TCO:</strong>
+        <span class="text-xs text-gray-400">Total Cost of Ownership (Alle Kosten über den gesamten Lebenszyklus).</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+        <strong class="text-white text-sm w-32 shrink-0">Make-or-Buy:</strong>
+        <span class="text-xs text-gray-400">Entscheidung, ob Software selbst entwickelt oder gekauft wird (COTS).</span>
+      </div>
+    </div>
+  </details>
+</div>
   `,
 
-  '1.2': `
-    <h3>Objektorientierung & Design Patterns</h3>
-    <p>Die Grundlage moderner Software-Architektur bildet die Objektorientierung (OOP) sowie bewährte Lösungsmuster (Design Patterns).</p>
-
-    <h4>1. Prinzipien der OOP</h4>
-    <ul>
-      <li><strong>Kapselung (Encapsulation):</strong> Geheimnisprinzip. Zustände (Attribute) sind von außen verborgen und nur über definierte Schnittstellen (Methoden, Getter/Setter) zugänglich.</li>
-      <li><strong>Vererbung (Inheritance):</strong> Eine Klasse (Kind) übernimmt Attribute und Methoden einer anderen (Eltern). Reduziert Code-Duplizierung (DRY).</li>
-      <li><strong>Polymorphie (Vielgestaltigkeit):</strong> Objekte unterschiedlicher Klassen können über dieselbe Schnittstelle aufgerufen werden (z.B. überschriebene Methoden, Interfaces).</li>
-      <li><strong>Abstraktion:</strong> Fokus auf das Wesentliche durch Weglassen irrelevanter Details (z.B. abstrakte Klassen).</li>
-    </ul>
-
-    <h4>2. SOLID-Prinzipien</h4>
-    <ul>
-      <li><strong>S</strong>ingle Responsibility: Eine Klasse sollte nur einen einzigen Grund zur Änderung haben.</li>
-      <li><strong>O</strong>pen/Closed: Offen für Erweiterungen, geschlossen für Änderungen (z.B. durch Interfaces/Vererbung).</li>
-      <li><strong>L</strong>iskov Substitution: Kindklassen müssen ihre Elternklassen ersetzen können, ohne dass das System bricht.</li>
-      <li><strong>I</strong>nterface Segregation: Viele kleine, spezifische Interfaces sind besser als ein großes (Fat Interface).</li>
-      <li><strong>D</strong>ependency Inversion: Abhaengigkeit von Abstraktionen, nicht von konkreten Implementierungen (Dependency Injection).</li>
-    </ul>
-
-    <h4>3. Design Patterns (Entwurfsmuster) (GoF)</h4>
-    <p>Bewährte Lösungsansätze für wiederkehrende Design-Probleme:</p>
-    <ul>
-      <li><strong>Singleton (Erzeugung):</strong> Garantiert, dass nur genau eine Instanz einer Klasse existiert (z.B. Datenbank-Verbindung). <em>Achtung: Oft als Anti-Pattern angesehen wegen versteckten Abhängigkeiten.</em></li>
-      <li><strong>Factory Method (Erzeugung):</strong> Erstellung von Objekten über eine zentrale Methode statt direktem <code>new</code>. Erleichtert den Austausch von Implementierungen.</li>
-      <li><strong>Observer / Beobachter (Verhalten):</strong> Ein Subjekt benachrichtigt bei Statusänderung automatisch alle registrierten Beobachter (z.B. Event-Listener in UI).</li>
-      <li><strong>Strategy (Verhalten):</strong> Algorithmen kapseln und zur Laufzeit austauschbar machen (z.B. verschiedene Sortierverfahren, Zahlungsarten).</li>
-      <li><strong>MVC (Model-View-Controller):</strong> Architekturmuster zur Trennung von Daten (Model), Darstellung (View) und Steuerung (Controller).</li>
-    </ul>
+    '1.2': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-400">
+        <i class="fa-solid fa-cubes"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Objektorientierung & Design Patterns</h3>
+        <p class="text-sm text-dark-muted m-0">Prinzipien und bewährte Entwicklungsstrukturen</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-shapes text-dark-accent mr-2"></i>1. OOP Prinzipien</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-dark-success">Kapselung (Encapsulation)</strong>
+          <p class="text-xs text-gray-400 m-0">Geheimnisprinzip. Zustände durch Getter/Setter verborgen.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-blue-400">Vererbung (Inheritance)</strong>
+          <p class="text-xs text-gray-400 m-0">Kind übernimmt Eltern (DRY).</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-dark-warning">Polymorphie</strong>
+          <p class="text-xs text-gray-400 m-0">Aufruf über dieselbe Schnittstelle (Vielgestaltigkeit).</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-purple-400">Abstraktion</strong>
+          <p class="text-xs text-gray-400 m-0">Fokus auf das Wesentliche durch Interfaces.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-layer-group text-dark-success mr-2"></i>2. SOLID</h4>
+      <ul class="space-y-3">
+        <li class="flex items-start"><div class="w-6 h-6 rounded bg-dark-card border border-dark-border text-xs flex items-center justify-center font-bold text-white mr-3 shrink-0">S</div><div><strong class="text-sm text-gray-200 block">Single Responsibility</strong><p class="text-xs text-gray-400 m-0">Nur ein Änderungsgrund.</p></div></li>
+        <li class="flex items-start"><div class="w-6 h-6 rounded bg-dark-card border border-dark-border text-xs flex items-center justify-center font-bold text-white mr-3 shrink-0">O</div><div><strong class="text-sm text-gray-200 block">Open/Closed</strong><p class="text-xs text-gray-400 m-0">Offen für Erweiterung, geschlossen für Änderung.</p></div></li>
+        <li class="flex items-start"><div class="w-6 h-6 rounded bg-dark-card border border-dark-border text-xs flex items-center justify-center font-bold text-white mr-3 shrink-0">L</div><div><strong class="text-sm text-gray-200 block">Liskov Substitution</strong><p class="text-xs text-gray-400 m-0">Kinder ersetzen Eltern ohne Bruch.</p></div></li>
+        <li class="flex items-start"><div class="w-6 h-6 rounded bg-dark-card border border-dark-border text-xs flex items-center justify-center font-bold text-white mr-3 shrink-0">I</div><div><strong class="text-sm text-gray-200 block">Interface Segregation</strong><p class="text-xs text-gray-400 m-0">Viele kleine statt ein fettes Interface.</p></div></li>
+        <li class="flex items-start"><div class="w-6 h-6 rounded bg-dark-card border border-dark-border text-xs flex items-center justify-center font-bold text-white mr-3 shrink-0">D</div><div><strong class="text-sm text-gray-200 block">Dependency Inversion</strong><p class="text-xs text-gray-400 m-0">Abhängigkeit von Abstraktionen.</p></div></li>
+      </ul>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>3. Design Patterns (GoF)</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="bg-dark-card border border-dark-border p-3 rounded-lg"><strong class="text-dark-warning block mb-1">Singleton (Erzeugung)</strong><p class="text-xs text-gray-400 m-0">1 Instanz (Oft Anti-Pattern).</p></div>
+      <div class="bg-dark-card border border-dark-border p-3 rounded-lg"><strong class="text-dark-warning block mb-1">Factory Method (Erzeugung)</strong><p class="text-xs text-gray-400 m-0">Zentrale Objekterstellung.</p></div>
+      <div class="bg-dark-card border border-dark-border p-3 rounded-lg"><strong class="text-blue-400 block mb-1">Observer (Verhalten)</strong><p class="text-xs text-gray-400 m-0">Events & Listener.</p></div>
+      <div class="bg-dark-card border border-dark-border p-3 rounded-lg"><strong class="text-blue-400 block mb-1">Strategy (Verhalten)</strong><p class="text-xs text-gray-400 m-0">Austauschbare Algorithmen.</p></div>
+      <div class="bg-dark-card border border-dark-border p-3 rounded-lg sm:col-span-2"><strong class="text-dark-success block mb-1">MVC (Architektur)</strong><p class="text-xs text-gray-400 m-0">Model, View, Controller Trennung.</p></div>
+    </div>
+  </details>
+</div>
   `,
 
-  '1.3': `
-    <h3>UML-Modellierung (Struktur & Verhalten)</h3>
-    <p>Die Unified Modeling Language (UML) ist der Standard zur Visualisierung von Software-Systemen.</p>
-
-    <h4>1. Klassendiagramm (Struktur)</h4>
-    <p>Kern der OOD. Zeigt das statische Modell.</p>
-    <ul>
-      <li><strong>Sichtbarkeiten:</strong> <code>+</code> (public), <code>-</code> (private), <code>#</code> (protected), <code>~</code> (package).</li>
-      <li><strong>Assoziation:</strong> Allgemeine Beziehung zwischen zwei Klassen (z.B. Lehrer unterrichtet Schüler).</li>
-      <li><strong>Aggregation (Leere Raute):</strong> "Hat-ein" (Has-A). Das Teil kann ohne das Ganze existieren (z.B. Auto &rarr; Reifen).</li>
-      <li><strong>Komposition (Ausgefüllte Raute):</strong> Starke "Hat-ein" Beziehung. Das Teil stirbt mit dem Ganzen (z.B. Gebäude &rarr; Raum).</li>
-      <li><strong>Generalisierung/Vererbung (Leerer Pfeil):</strong> "Ist-ein" (Is-A). Kindklasse erbt (z.B. PKW erbt von Fahrzeug).</li>
-      <li><strong>Abhängigkeit (Gestrichelter Pfeil):</strong> Nutzt-Beziehung (z.B. Parameter in Methode).</li>
-    </ul>
-
-    <h4>2. Sequenzdiagramm (Verhalten)</h4>
-    <p>Zeigt den Kommunikationsfluss zwischen Objekten über die Zeit.</p>
-    <ul>
-      <li><strong>Akteure/Objekte:</strong> Oben angeordnet.</li>
-      <li><strong>Lebenslinien:</strong> Gestrichelte Linien nach unten. Balken (Aktivierungsblöcke) zeigen aktive Verarbeitung an.</li>
-      <li><strong>Nachrichten:</strong> 
-        <ul>
-          <li>Durchgezogener Pfeil: Synchroner Aufruf (Warten auf Antwort).</li>
-          <li>Gestrichelter Pfeil, offene Spitze: Asynchroner Aufruf (Kein Warten).</li>
-          <li>Gestrichelter Pfeil: Rückgabewert (Return).</li>
+    '1.3': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-400">
+        <i class="fa-solid fa-diagram-project"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">UML-Modellierung</h3>
+        <p class="text-sm text-dark-muted m-0">Struktur & Verhalten darstellen</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-regular fa-object-group text-pink-400 mr-2"></i>1. Klassendiagramm</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-2 rounded border border-dark-border flex items-center justify-around text-xs text-gray-300">
+          <span><strong class="text-dark-success">+</strong> Publ</span>
+          <span><strong class="text-dark-danger">-</strong> Priv</span>
+          <span><strong class="text-dark-warning">#</strong> Prot</span>
+          <span><strong class="text-blue-400">~</strong> Pkg</span>
+        </div>
+        <ul class="text-xs text-gray-300 space-y-2 mt-2">
+          <li><strong>Leere Raute (Aggregation):</strong> Teil kann ohne existieren.</li>
+          <li><strong>Schwarze Raute (Komposition):</strong> Teil stirbt mit Ganzem.</li>
+          <li><strong>Leerer Pfeil:</strong> Vererbung (Ist-ein).</li>
+          <li><strong>Gestrichelt:</strong> Abhängigkeit (Nutzt).</li>
         </ul>
-      </li>
-      <li><strong>Fragmente (Frames):</strong>
-        <ul>
-          <li><code>alt</code> (Alternative / If-Else)</li>
-          <li><code>opt</code> (Optional / If ohne Else)</li>
-          <li><code>loop</code> (Schleife)</li>
-        </ul>
-      </li>
-    </ul>
-
-    <h4>3. Weitere Diagramme</h4>
-    <ul>
-      <li><strong>Anwendungsfalldiagramm (Use Case):</strong> Zeigt Akteure, Systemgrenze und Use Cases. 
-        <ul>
-          <li><code>&lt;&lt;include&gt;&gt;</code>: Zwingende Ausführung eines Sub-Cases.</li>
-          <li><code>&lt;&lt;extend&gt;&gt;</code>: Optionale Ausführung bei bestimmter Bedingung (Extension Point).</li>
-        </ul>
-      </li>
-      <li><strong>Zustandsdiagramm:</strong> Zeigt die Lebensphasen <em>eines einzigen</em> Objekts (Start, Zustände, Transitionen via Events/Guards, Ende).</li>
-      <li><strong>Aktivitätsdiagramm:</strong> Visualisiert Abläufe und Algorithmen (Gabelungen, Synchronisation).</li>
-    </ul>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-arrow-right-arrow-left text-blue-400 mr-2"></i>2. Sequenzdiagramm</h4>
+      <ul class="text-xs text-gray-300 space-y-2">
+        <li><strong>Lebenslinien:</strong> Gestrichelt abwärts. Balken = Aktiv.</li>
+        <li><strong>Pfeile:</strong><br>
+          <span class="text-blue-400">&rarr; Durchgezogen: Synchron</span><br>
+          <span class="text-dark-success">&rarr; Offen/Gestrichelt: Asynchron</span><br>
+          <span class="text-gray-500">&larr; Gestrichelt: Return</span>
+        </li>
+        <li><strong>Fragmente:</strong> <code>alt</code> (If-Else), <code>opt</code> (If), <code>loop</code>.</li>
+      </ul>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>3. Weitere wichtige Diagramme</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="bg-dark-card border border-dark-border p-3 rounded-lg"><strong class="text-white block mb-1">Use Case</strong><p class="text-xs text-gray-400 m-0">&laquo;include&raquo; (Pflicht), &laquo;extend&raquo; (Optional).</p></div>
+      <div class="bg-dark-card border border-dark-border p-3 rounded-lg"><strong class="text-white block mb-1">Zustandsdiagramm</strong><p class="text-xs text-gray-400 m-0">Lebenszyklus eines Objekts.</p></div>
+      <div class="bg-dark-card border border-dark-border p-3 rounded-lg"><strong class="text-white block mb-1">Aktivitätsdiagramm</strong><p class="text-xs text-gray-400 m-0">Abläufe & Algorithmen (Gabelungen).</p></div>
+    </div>
+  </details>
+</div>
   `,
 
-  '1.4': `
-    <h3>Software-Architektur & Schnittstellen</h3>
-    <p>Die Architektur bestimmt, wie ein System aus Komponenten zusammengesetzt ist und wie diese kommunizieren.</p>
+    '1.4': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-teal-500/20 flex items-center justify-center text-teal-400">
+        <i class="fa-solid fa-server"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Software-Architektur & Schnittstellen</h3>
+        <p class="text-sm text-dark-muted m-0">Aufbau und Kommunikation von Systemen</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-network-wired text-teal-400 mr-2"></i>1. Architektur-Stile</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Monolith</strong>
+          <p class="text-xs text-gray-400 m-0">Alles in einer deploybaren Einheit. Schwer skalierbar.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-blue-400">Schichtenarchitektur (N-Tier)</strong>
+          <p class="text-xs text-gray-400 m-0">Präsentation &rarr; Logik &rarr; Daten. Separation of Concerns.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-dark-success">Microservices</strong>
+          <p class="text-xs text-gray-400 m-0">Unabhängige kleine Dienste. Unabhängig skalierbar, aber komplex.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-exchange-alt text-dark-accent mr-2"></i>2. REST APIs</h4>
+      <p class="text-xs text-gray-400 mb-3">Representational State Transfer via HTTP.</p>
+      <div class="space-y-2 text-sm bg-dark-card p-4 rounded border border-dark-border">
+        <div class="flex border-b border-dark-border pb-2"><span class="text-blue-400 font-bold w-16">GET</span><span class="text-gray-300 text-xs">Abfragen (Sicher, Idempotent)</span></div>
+        <div class="flex border-b border-dark-border py-2"><span class="text-dark-success font-bold w-16">POST</span><span class="text-gray-300 text-xs">Erstellen (Nicht idempotent)</span></div>
+        <div class="flex border-b border-dark-border py-2"><span class="text-dark-warning font-bold w-16">PUT</span><span class="text-gray-300 text-xs">Komplett Ersetzen (Idempotent)</span></div>
+        <div class="flex border-b border-dark-border py-2"><span class="text-purple-400 font-bold w-16">PATCH</span><span class="text-gray-300 text-xs">Teilweise ändern</span></div>
+        <div class="flex pt-2"><span class="text-dark-danger font-bold w-16">DELETE</span><span class="text-gray-300 text-xs">Löschen (Idempotent)</span></div>
+      </div>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>3. HTTP-Statuscodes & Formate</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <strong class="text-white block mb-2 border-b border-dark-border pb-1">Statuscodes</strong>
+        <ul class="text-xs space-y-1 text-gray-400">
+          <li><span class="text-dark-success font-bold">2xx:</span> Erfolg (200 OK, 201 Created)</li>
+          <li><span class="text-blue-400 font-bold">3xx:</span> Umleitung (301 Moved)</li>
+          <li><span class="text-dark-warning font-bold">4xx:</span> Client-Fehler (400 Bad Req, 401 Unauth)</li>
+          <li><span class="text-dark-danger font-bold">5xx:</span> Server-Fehler (500 Internal, 502 Bad Gateway)</li>
+        </ul>
+      </div>
+      <div>
+        <strong class="text-white block mb-2 border-b border-dark-border pb-1">Datenaustausch</strong>
+        <div class="bg-dark-card border border-dark-border p-2 rounded mb-2 text-xs text-gray-300">
+          <strong class="text-dark-warning">JSON:</strong> Leicht, Key-Value, REST Standard.
+        </div>
+        <div class="bg-dark-card border border-dark-border p-2 rounded text-xs text-gray-300">
+          <strong class="text-blue-400">XML:</strong> Schwergewichtig, strukturtreu (XSD), SOAP.
+        </div>
+      </div>
+    </div>
+  </details>
+</div>
+  `,
 
-    <h4>1. Architektur-Stile</h4>
-    <ul>
-      <li><strong>Monolith:</strong> Alle Komponenten in einer einzigen, deploybaren Einheit. Leicht am Anfang, schwer skalierbar und wartbar bei großen Teams.</li>
-      <li><strong>Schichtenarchitektur (N-Tier) z.B. 3-Tier:</strong>
-        <ol>
-          <li>Präsentationsschicht (Client/UI)</li>
-          <li>Logikschicht (Application/Business Logic)</li>
-          <li>Datenhaltungsschicht (Database)</li>
+    '1.5': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-400">
+        <i class="fa-solid fa-desktop"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">UI/UX & Ergonomie</h3>
+        <p class="text-sm text-dark-muted m-0">Nutzerzentrierte Gestaltung & ISO 9241-110</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+    <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-users text-dark-success mr-2"></i>1. Softwareergonomie</h4>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div class="bg-dark-card p-3 rounded border border-dark-border text-center"><strong class="text-sm text-dark-success block">Aufgabenangemessen</strong><p class="text-[10px] text-gray-400 m-0">Unterstützt ohne Zusatzaufwand.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border text-center"><strong class="text-sm text-dark-success block">Selbstbeschreibend</strong><p class="text-[10px] text-gray-400 m-0">Rückmeldungen, direkt klar.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border text-center"><strong class="text-sm text-dark-success block">Erwartungskonform</strong><p class="text-[10px] text-gray-400 m-0">Konsistent zu Vorerfahrungen.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border text-center"><strong class="text-sm text-dark-success block">Lernförderlich</strong><p class="text-[10px] text-gray-400 m-0">Hilft Bedienung zu erlernen.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border text-center"><strong class="text-sm text-dark-success block">Steuerbar</strong><p class="text-[10px] text-gray-400 m-0">Nutzer kontrolliert Ablauf.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border text-center"><strong class="text-sm text-dark-success block">Fehlertolerant</strong><p class="text-[10px] text-gray-400 m-0">Zielerreichung trotz Fehleingabe.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border text-center sm:col-span-2 lg:col-span-3"><strong class="text-sm text-dark-success block">Individualisierbar</strong><p class="text-[10px] text-gray-400 m-0">Anpassbar an Bedürfnisse (Shortcuts).</p></div>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>2. Barrierefreiheit (POUR)</summary>
+    <div class="lz-content">
+      <p class="text-xs text-gray-400 mb-4">Pflicht für Behörden (BITV 2.0) und geregelt in den WCAG 2.1.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="border-l-2 border-blue-400 pl-3"><strong class="text-white text-sm block">Perceivable (Wahrnehmbar)</strong><span class="text-xs text-gray-400">Alt-Tags für Bilder, Kontrast.</span></div>
+        <div class="border-l-2 border-dark-warning pl-3"><strong class="text-white text-sm block">Operable (Bedienbar)</strong><span class="text-xs text-gray-400">Tastaturgesteuert, Tab-Order.</span></div>
+        <div class="border-l-2 border-dark-success pl-3"><strong class="text-white text-sm block">Understandable (Verständlich)</strong><span class="text-xs text-gray-400">Einfache Sprache, klares Feedback.</span></div>
+        <div class="border-l-2 border-dark-accent pl-3"><strong class="text-white text-sm block">Robust (Robust)</strong><span class="text-xs text-gray-400">Screenreader Kompatibel (ARIA).</span></div>
+      </div>
+    </div>
+  </details>
+  <details class="lz-details">
+    <summary>3. Design-Prozess</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><i class="fa-regular fa-square text-lg text-gray-500 mb-1"></i><strong class="text-sm text-white block">Wireframe</strong><p class="text-[10px] text-gray-400 m-0">Graustufen-Skelett.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><i class="fa-solid fa-paintbrush text-lg text-blue-400 mb-1"></i><strong class="text-sm text-white block">Mockup</strong><p class="text-[10px] text-gray-400 m-0">Echte Farben & Typografie.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><i class="fa-solid fa-hand-pointer text-lg text-dark-accent mb-1"></i><strong class="text-sm text-white block">Prototyp</strong><p class="text-[10px] text-gray-400 m-0">Klickbar & interaktiv.</p></div>
+    </div>
+  </details>
+</div>
+  `,
+
+    // --- PB 2: Entwicklung und Umsetzung von Algorithmen ---
+    '2.1': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+        <i class="fa-solid fa-code"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Algorithmen & Programmierung</h3>
+        <p class="text-sm text-dark-muted m-0">Logikkonzeption bis Implementierung</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-diagram-next text-indigo-400 mr-2"></i>1. Logik-Darstellung</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Struktogramme (Nassi-Shneiderman)</strong>
+          <p class="text-[10px] text-gray-400 m-0">Zeigt Sequenz, IF, WHILE als Boxen. Wichtig in der AP2: Code &rarr; Struktogramm.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Aktivitätsdiagramm (UML)</strong>
+          <p class="text-[10px] text-gray-400 m-0">Rauten = Entscheidungen <code>[Guard]</code>. Schwarze Balken = Parallele Abläufe.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-sort-amount-down text-dark-warning mr-2"></i>2. Such- & Sortieralgorithmen</h4>
+      <ul class="text-xs text-gray-300 space-y-2">
+        <li class="border-b border-dark-border pb-1"><strong>Bubble Sort:</strong> Vergleicht Nachbarn, Ineffizient O(n&sup2;).</li>
+        <li class="border-b border-dark-border pb-1"><strong>Selection Sort:</strong> Sucht Minimum, setzt es nach vorne.</li>
+        <li class="border-b border-dark-border pb-1"><strong>Insertion Sort:</strong> Einfügen in sortierten vorderen Teil.</li>
+        <li class="border-b border-dark-border pb-1"><strong class="text-blue-400">Lineare Suche:</strong> Element für Element, O(n).</li>
+        <li><strong class="text-dark-success">Binäre Suche:</strong> Nur bei sortierten Listen. Halbiert wiederholt Suchraum, sehr schnell O(log n).</li>
+      </ul>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>3. Rekursion & Fehlerbehandlung</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div>
+        <strong class="text-white block mb-3 border-b border-dark-border pb-1">Iteration vs Rekursion</strong>
+        <div class="bg-dark-card p-3 rounded border border-dark-border mb-2"><strong class="text-sm text-dark-success block">Iteration</strong><p class="text-[10px] text-gray-400 m-0">Schleifen (for, while). Speicherschonend.</p></div>
+        <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-warning block">Rekursion</strong><p class="text-[10px] text-gray-400 m-0">Selbstaufruf. Benötigt Abbruchbedingung (Stack Overflow Gefahr).</p></div>
+      </div>
+      <div>
+        <strong class="text-white block mb-3 border-b border-dark-border pb-1">Exception Handling</strong>
+        <p class="text-[10px] text-gray-500 mb-2 font-mono">try { ... } catch (e) { ... } finally { ... }</p>
+        <ul class="text-xs text-gray-400 space-y-1">
+          <li><strong>try:</strong> Gefährlicher Code (DB/File Zugriff).</li>
+          <li><strong>catch:</strong> Bei Fehler. Hier loggen/behandeln.</li>
+          <li><strong>finally:</strong> Wird <em>immer</em> ausgeführt (Ressourcen schließen).</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</div>
+  `,
+
+    '2.2': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400">
+        <i class="fa-solid fa-table"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Datenbank-Design & Normalisierung</h3>
+        <p class="text-sm text-dark-muted m-0">ERM, Mapping und Normalformen</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-project-diagram text-green-400 mr-2"></i>1. ER-Modell & Relationales Modell</h4>
+      <div class="space-y-4">
+        <div>
+          <strong class="text-sm text-gray-300 block mb-1">ERM (Chen-Notation)</strong>
+          <div class="flex gap-2 text-[10px] text-gray-400">
+            <span class="bg-dark-card border border-dark-border px-2 py-1 rounded">Entität = Rechteck</span>
+            <span class="bg-dark-card border border-dark-border px-2 py-1 rounded">Attribut = Oval</span>
+            <span class="bg-dark-card border border-dark-border px-2 py-1 rounded">Relation = Raute</span>
+          </div>
+        </div>
+        <div>
+          <strong class="text-sm text-gray-300 block mb-1 border-b border-dark-border pb-1">Auflösung in Tabellen</strong>
+          <ul class="text-xs text-gray-400 space-y-2">
+            <li><strong>1:1</strong> PK der einen in die andere als FK.</li>
+            <li><strong>1:n</strong> PK der '1'-Seite wird FK in der 'n'-Seite Tabelle.</li>
+            <li><strong class="text-dark-danger">m:n</strong> Zwingend in Verknüpfungstabelle (Kreuztabelle) auflösen! Beide PKs werden zu FKs (zusammengesetzter PK).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-filter text-blue-400 mr-2"></i>2. Normalisierung</h4>
+      <p class="text-[10px] text-gray-400 mb-3">Vermeidung redundanter Daten und Änderungsanomalien.</p>
+      <div class="space-y-2">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">1. NF (Atomarität)</strong>
+          <p class="text-[10px] text-gray-400 m-0">Alle Attribute unteilbar. Pro Feld nur EIN Wert, keine Arrays. PK vergeben.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">2. NF (Volle funktionale Abhängigkeit)</strong>
+          <p class="text-[10px] text-gray-400 m-0">In 1.NF. Jedes Nicht-Schlüssel-Attribut hängt vom <em>gesamten</em> PK ab.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">3. NF (Keine transitiven Abhängigkeiten)</strong>
+          <p class="text-[10px] text-gray-400 m-0">In 2.NF. Kein Nicht-Schlüssel-Attribut hängt von einem anderen ab (z.B. PLZ &rarr; Ort auslagern).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>3. Referenzielle Integrität</summary>
+    <div class="lz-content">
+      <p class="text-xs text-gray-400 mb-3">Sicherstellt, dass Fremdschlüssel (FK) nur primäre Schlüsseleinträge (PK) der anderen Tabelle referenzieren (Keine verwaisten Einträge/Zombies).</p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex-1 bg-dark-card border border-dark-border p-3 rounded">
+          <strong class="text-dark-danger block mb-1 text-sm">ON DELETE CASCADE</strong>
+          <p class="text-xs text-gray-400 m-0">Wird Eltern-Satz gelöscht, werden alle Kinder mitgelöscht.</p>
+        </div>
+        <div class="flex-1 bg-dark-card border border-dark-border p-3 rounded">
+          <strong class="text-dark-warning block mb-1 text-sm">ON DELETE SET NULL</strong>
+          <p class="text-xs text-gray-400 m-0">Wird Eltern-Satz gelöscht, wird der FK bei Kindern auf NULL gesetzt.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+</div>
+  `,
+
+    '2.3': `
+<div class="space-y-8 pb-4">
+  <!-- Intro -->
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">
+        <i class="fa-solid fa-database"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Fortgeschrittenes SQL & DB-Design</h3>
+        <p class="text-sm text-dark-muted m-0">Datenabfrage (DQL), Datenmanipulation (DML) und Definition (DDL)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOINs -->
+  <div class="bg-dark-bg border border-dark-border rounded-xl overflow-hidden">
+    <div class="bg-dark-card px-5 py-3 border-b border-dark-border flex items-center justify-between">
+      <h4 class="font-bold text-white m-0"><i class="fa-solid fa-link text-dark-accent mr-2"></i>1. JOINs (Tabellen verknüpfen)</h4>
+      <span class="bg-dark-danger/10 text-dark-danger border border-dark-danger/20 px-2 py-0.5 rounded text-[10px] font-bold uppercase">Kritisch für AP2</span>
+    </div>
+    <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="border border-dark-border rounded-lg p-3 bg-[#0a0f1d]">
+        <strong class="text-sm text-white block mb-1 text-dark-success">INNER JOIN</strong>
+        <p class="text-xs text-gray-400 mb-0">Liefert Schnittmenge. Nur Datensätze, bei denen ein Match in beiden Tabellen vorliegt.</p>
+      </div>
+      <div class="border border-dark-border rounded-lg p-3 bg-[#0a0f1d]">
+        <strong class="text-sm text-white block mb-1 text-blue-400">LEFT (OUTER) JOIN</strong>
+        <p class="text-xs text-gray-400 mb-0">Liefert <em>alle</em> Datensätze der linken Tabelle. Wo es rechts keinen Match gibt, steht <code>NULL</code>.</p>
+      </div>
+      <div class="border border-dark-border rounded-lg p-3 bg-[#0a0f1d]">
+        <strong class="text-sm text-white block mb-1 text-dark-warning">FULL JOIN</strong>
+        <p class="text-xs text-gray-400 mb-0">Liefert alles von links und rechts (Schnitt- inkl. Restmenge).</p>
+      </div>
+      <div class="border border-dark-border rounded-lg p-3 bg-[#0a0f1d]">
+        <strong class="text-sm text-white block mb-1 text-purple-400">SELF JOIN</strong>
+        <p class="text-xs text-gray-400 mb-0">Tabelle wird mit sich selbst verknüpft (z.B. Mitarbeiterstruktur). Erfordert Aliase (M1, M2).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACID & Aggregatfunktionen Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- ACID -->
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-shield-halved text-dark-success mr-2"></i>2. ACID-Prinzip</h4>
+      <ul class="space-y-3">
+        <li class="flex items-start">
+          <div class="w-6 h-6 rounded bg-dark-card border border-dark-border text-xs flex items-center justify-center font-bold text-white mr-3 shrink-0">A</div>
+          <div>
+            <strong class="text-sm text-gray-200 block">Atomicity (Atomarität)</strong>
+            <p class="text-xs text-gray-400 mb-0">Ganz oder gar nicht (Unteilbarkeit).</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <div class="w-6 h-6 rounded bg-dark-card border border-dark-border text-xs flex items-center justify-center font-bold text-white mr-3 shrink-0">C</div>
+          <div>
+            <strong class="text-sm text-gray-200 block">Consistency (Konsistenz)</strong>
+            <p class="text-xs text-gray-400 mb-0">Datenbank ist nachher in einem validen Zustand.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <div class="w-6 h-6 rounded bg-dark-card border border-dark-border text-xs flex items-center justify-center font-bold text-white mr-3 shrink-0">I</div>
+          <div>
+            <strong class="text-sm text-gray-200 block">Isolation (Isolation)</strong>
+            <p class="text-xs text-gray-400 mb-0">Parallele Transaktionen beeinflussen sich nicht.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <div class="w-6 h-6 rounded bg-dark-card border border-dark-border text-xs flex items-center justify-center font-bold text-white mr-3 shrink-0">D</div>
+          <div>
+            <strong class="text-sm text-gray-200 block">Durability (Dauerhaftigkeit)</strong>
+            <p class="text-xs text-gray-400 mb-0">Bestätigte Daten bleiben sicher gespeichert.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Aggregatfunktionen -->
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-calculator text-dark-warning mr-2"></i>3. Aggregatfunktionen</h4>
+      <p class="text-sm text-gray-300 mb-3">Fassen mehrere Zeilen zusammen: <code>COUNT, SUM, AVG, MIN, MAX</code>.</p>
+      <div class="bg-dark-danger/10 border border-dark-danger/30 rounded-lg p-3 mb-3">
+        <p class="text-xs text-dark-danger font-bold m-0"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Wichtige Regel!</p>
+        <p class="text-xs text-gray-300 mb-0 mt-1">Sobald eine Aggregatfunktion genutzt wird, müssen alle nicht-aggregierten Spalten zwingend im <code>GROUP BY</code> stehen!</p>
+      </div>
+      <div class="bg-dark-card border border-dark-border rounded-lg p-3">
+        <strong class="text-sm text-white block">HAVING vs WHERE</strong>
+        <p class="text-xs text-gray-400 mb-0 mt-1"><code>HAVING</code> filtert nach der Gruppierung, <code>WHERE</code> filtert davor.</p>
+      </div>
+    </div>
+  </div>
+
+  <details class="lz-details">
+    <summary>4. SQL Anweisungstypen (DML, DDL, TCL)</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div>
+        <strong class="text-dark-success block border-b border-dark-border pb-1 mb-2">DML (Manipulation)</strong>
+        <ul class="space-y-1 text-xs text-gray-400">
+          <li><code>SELECT</code></li>
+          <li><code>INSERT INTO</code></li>
+          <li><code>UPDATE SET</code></li>
+          <li><code>DELETE FROM</code></li>
+        </ul>
+      </div>
+      <div>
+        <strong class="text-blue-400 block border-b border-dark-border pb-1 mb-2">DDL (Definition)</strong>
+        <ul class="space-y-1 text-xs text-gray-400">
+          <li><code>CREATE TABLE</code></li>
+          <li><code>ALTER TABLE</code></li>
+          <li><code>DROP TABLE</code></li>
+        </ul>
+      </div>
+      <div>
+        <strong class="text-dark-warning block border-b border-dark-border pb-1 mb-2">TCL (Transaktion)</strong>
+        <ul class="space-y-1 text-xs text-gray-400">
+          <li><code>BEGIN TRANSACTION</code></li>
+          <li><code>COMMIT</code></li>
+          <li><code>ROLLBACK</code></li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</div>
+  `,
+
+    // --- PB 3: Fachrichtungsübergreifend ---
+    '3.1': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400">
+        <i class="fa-solid fa-network-wired"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Netzwerktechnik & Cloud</h3>
+        <p class="text-sm text-dark-muted m-0">Infrastruktur, OSI-Modell und Virtualisierung</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-layer-group text-cyan-400 mr-2"></i>1. Das OSI-Modell</h4>
+      <p class="text-[10px] text-gray-400 mb-3">Referenzmodell für Netzwerkprotokolle (7 Schichten).</p>
+      <div class="space-y-1 text-xs">
+        <div class="flex justify-between border-b border-dark-border py-1"><strong class="text-gray-300">7. Application</strong><span class="text-gray-500">HTTP, FTP, DNS (Daten)</span></div>
+        <div class="flex justify-between border-b border-dark-border py-1"><strong class="text-gray-300">6. Presentation</strong><span class="text-gray-500">SSL/TLS, JPEG (Daten)</span></div>
+        <div class="flex justify-between border-b border-dark-border py-1"><strong class="text-gray-300">5. Session</strong><span class="text-gray-500">Sitzungsaufbau (Daten)</span></div>
+        <div class="flex justify-between border-b border-dark-border py-1"><strong class="text-blue-400">4. Transport</strong><span class="text-gray-500">TCP, UDP, Ports (Segmente)</span></div>
+        <div class="flex justify-between border-b border-dark-border py-1"><strong class="text-dark-success">3. Network</strong><span class="text-gray-500">IP, Routing (Pakete)</span></div>
+        <div class="flex justify-between border-b border-dark-border py-1"><strong class="text-dark-warning">2. Data Link</strong><span class="text-gray-500">MAC, Switches (Frames)</span></div>
+        <div class="flex justify-between py-1"><strong class="text-gray-300">1. Physical</strong><span class="text-gray-500">Kabel, Hubs (Bits)</span></div>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-cloud text-blue-400 mr-2"></i>2. Cloud & Virtualisierung</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-dark-success">Bare Metal vs Hosted</strong>
+          <p class="text-[10px] text-gray-400 m-0">Typ 1 (ESXi/Proxmox) direkt auf HW vs Typ 2 (VirtualBox) auf OS.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-blue-400">Container (Docker)</strong>
+          <p class="text-[10px] text-gray-400 m-0">Teilen sich Kernel des Host-OS. Leichtgewichtiger als VMs.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-purple-400">Cloud-Modelle</strong>
+          <p class="text-[10px] text-gray-400 m-0">IaaS (Nur Server), PaaS (Runtime gestellt), SaaS (Fertige App).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>3. Wichtige Protokolle & Ports</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-white block mb-1">DNS (Port 53, UDP)</strong><p class="text-xs text-gray-400 m-0">Namensauflösung (google.de &rarr; IP).</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-white block mb-1">DHCP (Port 67/68, UDP)</strong><p class="text-xs text-gray-400 m-0">Auto-IP Vergabe (DORA-Prinzip).</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-white block mb-1">HTTP/S (Port 80/443, TCP)</strong><p class="text-xs text-gray-400 m-0">Web-Traffic.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-white block mb-1">SSH (Port 22, TCP)</strong><p class="text-xs text-gray-400 m-0">Sichere Shell.</p></div>
+    </div>
+  </details>
+</div>
+  `,
+
+    '3.2': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-red-400">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">IT-Sicherheit (Security)</h3>
+        <p class="text-sm text-dark-muted m-0">Schutzziele, Kryptografie und Web-Angriffe</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+    <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-lock text-red-400 mr-2"></i>1. Die 4 Schutzziele</h4>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Vertraulichkeit</strong><p class="text-[10px] text-gray-400 m-0">Nur für Befugte lesbar (Verschlüsselung).</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Integrität</strong><p class="text-[10px] text-gray-400 m-0">Daten unverfälscht (Hashing).</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Verfügbarkeit</strong><p class="text-[10px] text-gray-400 m-0">Systeme erreichbar (RAID, Backups).</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Authentizität</strong><p class="text-[10px] text-gray-400 m-0">Echt-Nachweis (Zertifikate, Signaturen).</p></div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-key text-dark-warning mr-2"></i>2. Kryptografie (Verschlüsselung)</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Symmetrisch (z.B. AES)</strong>
+          <p class="text-xs text-gray-400 m-0">Ein Schlüssel für Ver- und Entschlüsseln. Schnell, aber Schlüsseltausch-Problem.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-blue-400">Asymmetrisch (z.B. RSA)</strong>
+          <p class="text-xs text-gray-400 m-0">Keypair (Pub/Priv). Verschlüsseln mit Pub, nur Priv kann entschlüsseln. Langsam.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-purple-400">Hybride / TLS</strong>
+          <p class="text-xs text-gray-400 m-0">Asymmetrisch zum Key-Exchange, danach Symmetrisch für schnellen Datenfluss.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-dark-success">Hashing (z.B. SHA-256)</strong>
+          <p class="text-xs text-gray-400 m-0">Einwegfunktion! Nicht entschlüsselbar (PW-Speicherung).</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-bug text-dark-danger mr-2"></i>3. Web-Angriffe & Abwehr</h4>
+      <ul class="text-xs text-gray-300 space-y-3">
+        <li><strong class="text-dark-danger block">SQL-Injection</strong><span class="text-gray-400">DB Schadcode. <strong>Abwehr:</strong> Prepared Statements. Niemals Strings ketten!</span></li>
+        <li><strong class="text-dark-warning block">XSS (Cross-Site Scripting)</strong><span class="text-gray-400">Böses JS in Webseite eingeschleust (klaut Cookies). <strong>Abwehr:</strong> HTML-Encoding, Input Sanitization.</span></li>
+        <li><strong class="text-blue-400 block">CSRF (Cross-Site Req Forgery)</strong><span class="text-gray-400">Führt ungewollte Aktionen aus. <strong>Abwehr:</strong> CSRF-Tokens in Formularen.</span></li>
+      </ul>
+      <div class="mt-4 bg-dark-card p-3 rounded border border-dark-border">
+        <strong class="text-sm text-white block mb-1">Digitale Signatur (Integrität & Urheber)</strong>
+        <p class="text-[10px] text-gray-400 m-0">Sender hasht Dokument und verschlüsselt Hash mit seinem PRIVATE Key. Empfänger prüft via PUBLIC Key.</p>
+      </div>
+    </div>
+  </div>
+</div>
+  `,
+
+    '3.3': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-yellow-500/20 flex items-center justify-center text-yellow-400">
+        <i class="fa-solid fa-clipboard-check"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Qualitätssicherung & DevOps</h3>
+        <p class="text-sm text-dark-muted m-0">Tests, Metriken und Versionsverwaltung</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-list-check text-yellow-400 mr-2"></i>1. Teststufen (V-Modell)</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Unit-Test (Modul)</strong>
+          <p class="text-xs text-gray-400 m-0">Isoliert, kleinster Baustein (Klasse/Methode). Oft mit Mocks. Entwickler (White-Box).</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Integrationstest</strong>
+          <p class="text-xs text-gray-400 m-0">Zusammenspiel mehrerer Module (Schnittstellen). Entwickler/Tester.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Systemtest</strong>
+          <p class="text-xs text-gray-400 m-0">Gesamtsystem gegen Anforderungen des Pflichtenhefts. Tester (Black-Box).</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Abnahmetest (Akzeptanz)</strong>
+          <p class="text-xs text-gray-400 m-0">Entspricht Software dem Kundenwunsch? Produktiv-ähnlich. Durch Kunde/PO.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-vial text-blue-400 mr-2"></i>2. Testmethoden & Metriken</h4>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div class="bg-dark-card border border-dark-border p-2 rounded"><strong class="text-xs text-white block">Black-Box</strong><p class="text-[10px] text-gray-400 m-0">Code unbekannt. Input &rarr; Output Test.</p></div>
+        <div class="bg-dark-card border border-dark-border p-2 rounded"><strong class="text-xs text-white block">White-Box</strong><p class="text-[10px] text-gray-400 m-0">Code bekannt. Testet Logikflüsse (Ifs).</p></div>
+        <div class="bg-dark-card border border-dark-border p-2 rounded"><strong class="text-xs text-white block">Äquivalenzklassen</strong><p class="text-[10px] text-gray-400 m-0">Reduziert Testfälle durch Gruppenbildung.</p></div>
+        <div class="bg-dark-card border border-dark-border p-2 rounded"><strong class="text-xs text-white block">Grenzwertanalyse</strong><p class="text-[10px] text-gray-400 m-0">An Klassengrenzen (-1, 0, 1) wg. OBO-Fehlern.</p></div>
+      </div>
+      <strong class="text-sm text-white block mb-1">Code Coverage</strong>
+      <ul class="text-[10px] text-gray-400 space-y-1">
+        <li><strong>C0 (Statement):</strong> % der ausgeführten Zeilen.</li>
+        <li><strong class="text-blue-400">C1 (Branch):</strong> Jede Verzweigung (True/False) erfasst? (Wichtig).</li>
+        <li><strong>C2 (Condition):</strong> Jede Teilbedingung separat erfasst?</li>
+      </ul>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>3. TDD & Git</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div>
+        <strong class="text-white block mb-2 border-b border-dark-border pb-1">Test Driven Development (TDD)</strong>
+        <p class="text-xs text-gray-400 font-bold mb-2">Red &rarr; Green &rarr; Refactor</p>
+        <ol class="text-xs text-gray-400 list-decimal pl-4 space-y-1">
+          <li>Test schreiben (schlägt fehl).</li>
+          <li>Mindestcode schreiben, um Test zu bestehen.</li>
+          <li>Code Refactorn.</li>
         </ol>
-        <em>Vorteil:</em> Separation of Concerns, Austauschbarkeit von Layern.
-      </li>
-      <li><strong>Microservices:</strong> Kleine, unabhängige Dienste, die je eine spezifische Geschäftsfunktion abbilden. Sie kommunizieren via APIs. Eigene DB pro Service möglich. <em>Vorteil:</em> Unabhängig skalierbar, flexibler Techeinsatz. <em>Nachteil:</em> Hohe Komplexität, verteilte Transaktionen.</li>
-    </ul>
-
-    <h4>2. REST APIs (Representational State Transfer)</h4>
-    <p>Strukturierter Zugriff auf Web-Ressourcen via HTTP.</p>
-    <ul>
-      <li><strong>HTTP-Methoden:</strong>
-        <ul>
-          <li><code>GET</code>: Ressource abfragen (sicher, idempotent).</li>
-          <li><code>POST</code>: Neue Ressource erstellen (nicht idempotent).</li>
-          <li><code>PUT</code>: Gesamte Ressource ersetzen (idempotent).</li>
-          <li><code>PATCH</code>: Ressource teilweise aktualisieren.</li>
-          <li><code>DELETE</code>: Ressource löschen (idempotent).</li>
+      </div>
+      <div>
+        <strong class="text-white block mb-2 border-b border-dark-border pb-1">Git Basics</strong>
+        <ul class="text-xs text-gray-400 space-y-1">
+          <li><code>add</code>: Staging</li>
+          <li><code>commit</code>: Lokal speichern</li>
+          <li><code>push</code> & <code>pull</code>: Remote Sync</li>
+          <li><code>branch</code> & <code>merge</code>: Verzweigen & Zusammenführen</li>
         </ul>
-      </li>
-      <li><strong>HTTP-Statuscodes:</strong>
-        <ul>
-          <li><code>2xx Erfolg</code> (200 OK, 201 Created, 204 No Content)</li>
-          <li><code>3xx Umleitung</code> (301 Moved Permanently, 304 Not Modified)</li>
-          <li><code>4xx Client-Fehler</code> (400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found)</li>
-          <li><code>5xx Server-Fehler</code> (500 Internal Server Error, 502 Bad Gateway)</li>
+      </div>
+    </div>
+  </details>
+</div>
+  `,
+
+    '3.4': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-teal-500/20 flex items-center justify-center text-teal-400">
+        <i class="fa-solid fa-gavel"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Datenschutz (DSGVO) & Recht</h3>
+        <p class="text-sm text-dark-muted m-0">Regeln zur Datenverarbeitung und Lizenzen</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+    <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-scale-balanced text-teal-400 mr-2"></i>1. DSGVO-Prinzipien (Art. 5)</h4>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Rechtmäßigkeit</strong><p class="text-[10px] text-gray-400 m-0">Immer Erlaubnis nötig (Einwilligung, Vertrag).</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Zweckbindung</strong><p class="text-[10px] text-gray-400 m-0">Nur für den festgelegten Zweck nutzen.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Datenminimierung</strong><p class="text-[10px] text-gray-400 m-0">Nur absolut Notwendiges sammeln.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Richtigkeit</strong><p class="text-[10px] text-gray-400 m-0">Daten aktuell & korrekt halten.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Speicherbegrenzung</strong><p class="text-[10px] text-gray-400 m-0">Löschen wenn Zweck entfällt.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-success block">Integrität (TOMs)</strong><p class="text-[10px] text-gray-400 m-0">Technisch/Orga Absicherung (Verschlüsselung).</p></div>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>2. DSGVO Konzepte & Rollen</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-white block mb-1">Betroffenenrechte</strong><p class="text-xs text-gray-400 m-0">Auskunft (15), Vergessenwerden (17), Datenübertragbarkeit.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-dark-danger block mb-1">Besondere Kategorien (Art. 9)</strong><p class="text-xs text-gray-400 m-0">Gesundheit, Biometrie, Religion. Sehr streng, zwingend Einwilligung!</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-white block mb-1">AVV (Auftragsverarbeitung)</strong><p class="text-xs text-gray-400 m-0">Vertrag zwingend, wenn Externe (Cloud-Hoster) Personendaten verarbeiten.</p></div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border"><strong class="text-sm text-white block mb-1">DSB (Datenschutzbeauftragter)</strong><p class="text-xs text-gray-400 m-0">Pflicht idR ab 20 MA. Kein GF (Interessenkonflikt).</p></div>
+    </div>
+  </details>
+  <details class="lz-details">
+    <summary>3. Urheberrecht / Lizenzen</summary>
+    <div class="lz-content">
+      <p class="text-xs text-gray-400 mb-3">Software ist als Werk direkt beim Schreiben urheberrechtlich geschützt.</p>
+      <div class="space-y-2 text-sm text-gray-300">
+        <div class="flex items-center"><strong class="w-32 text-blue-400">Proprietär</strong><span class="text-xs text-gray-400">Nutzungsrecht via EULA erkauft. Quellcode zu.</span></div>
+        <div class="flex items-center"><strong class="w-32 text-dark-success">OS Permissiv</strong><span class="text-xs text-gray-400">MIT, Apache. Ändern & kommerziell nutzen erlaubt.</span></div>
+        <div class="flex items-center"><strong class="w-32 text-dark-warning">OS Restriktiv</strong><span class="text-xs text-gray-400">GPL (Copyleft). Wenn modifiziert angeboten, MUSS das Gesamtwerk OS bleiben (Virenartig).</span></div>
+      </div>
+    </div>
+  </details>
+</div>
+  `,
+
+    '4.1': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-400">
+        <i class="fa-solid fa-scale-unbalanced"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Arbeits- & Tarifrecht</h3>
+        <p class="text-sm text-dark-muted m-0">Rechte und Pflichten in der Ausbildung und im Beruf</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-book-open text-orange-400 mr-2"></i>1. Gesetzliche Rahmenbedingungen</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Arbeitszeitgesetz (ArbZG)</strong>
+          <p class="text-xs text-gray-400 m-0">Pausen: Nach 6h &rarr; 30m, nach 9h &rarr; 45m. Max. 8-10h/Tag. Ruhezeit: Min. 11h.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Jugendarbeitsschutz (JArbSchG)</strong>
+          <p class="text-xs text-gray-400 m-0"><18 Jahre. Max 5 Tage/Woche, 40h, 8h/Tag. Keine Nacht/Wochenendsarbeit.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 border-b border-dark-border pb-1">Kündigungsschutz (KSchG)</strong>
+          <p class="text-[10px] text-gray-400 m-0 pt-1">Greift nach 6M Probezeit bei >10 Vollzeit-MA. Kündigung nur personenbedingt, verhaltensbedingt (Abmahnung!) oder betriebsbedingt (Sozialauswahl).</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-handshake-angle text-blue-400 mr-2"></i>2. Sozialversicherungen</h4>
+      <p class="text-[10px] text-gray-400 mb-3">Beiträge werden i.d.R. 50/50 geteilt (AG/AN).</p>
+      <div class="grid grid-cols-1 gap-2 text-xs">
+        <div class="bg-dark-card border border-dark-border p-2 rounded flex justify-between"><strong class="text-white">Kranken (KV)</strong><span class="text-gray-500">~14.6% + Zusatz</span></div>
+        <div class="bg-dark-card border border-dark-border p-2 rounded flex justify-between"><strong class="text-white">Pflege (PV)</strong><span class="text-gray-500">Kinderlose zahlen mehr</span></div>
+        <div class="bg-dark-card border border-dark-border p-2 rounded flex justify-between"><strong class="text-white">Rente (RV)</strong><span class="text-gray-500">~18.6% (Größter Posten)</span></div>
+        <div class="bg-dark-card border border-dark-border p-2 rounded flex justify-between"><strong class="text-white">Arbeitslosen (AV)</strong><span class="text-gray-500">BA für Arbeit</span></div>
+        <div class="bg-dark-card border border-dark-danger/50 p-2 rounded flex justify-between items-center"><strong class="text-dark-danger">Unfall (UV)</strong><span class="text-[10px] text-gray-300">Zu 100% vom Arbeitgeber!</span></div>
+      </div>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>3. Ausbildungsvertrag (BBiG) & Mitbestimmung</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <strong class="text-white block mb-2 border-b border-dark-border pb-1">Ausbildung (BBiG)</strong>
+        <ul class="text-xs text-gray-400 space-y-1">
+          <li>Vor Beginn schriftlich schließen.</li>
+          <li>Probezeit: Zwingend 1-4 Monate (Fristlose Kündigung ohne Grund möglich).</li>
+          <li>Nach Probezeit: Azubi kündigt mit 4 Wochen Frist (Berufsaufgabe). AG nur fristlos (Wichtiger Grund).</li>
         </ul>
-      </li>
-    </ul>
-
-    <h4>3. Datenaustauschformate</h4>
-    <ul>
-      <li><strong>JSON (JavaScript Object Notation):</strong> Leichtgewichtig, gut lesbar, Key-Value Pairs, De-facto-Standard bei REST.</li>
-      <li><strong>XML (Extensible Markup Language):</strong> Schwergewichtiger, stark typisiert (via XSD/DTD). Standard bei SOAP.</li>
-    </ul>
-  `,
-
-  '1.5': `
-    <h3>UI/UX & Ergonomie</h3>
-    <p>Eine gute Software muss für den Nutzer intuitiv bedienbar, effizient und zugänglich sein.</p>
-
-    <h4>1. Softwareergonomie (DIN EN ISO 9241-110)</h4>
-    <p>Grundsätze der Dialoggestaltung:</p>
-    <ul>
-      <li><strong>Aufgabenangemessenheit:</strong> Untersützt bei der Erledigung der Arbeitsaufgabe ohne unnötigen Aufwand.</li>
-      <li><strong>Selbstbeschreibungsfähigkeit:</strong> Jeder Dialogschritt ist durch Rückmeldungen verständlich.</li>
-      <li><strong>Erwartungskonformität:</strong> Konsistent, entspricht den Erfahrungen des Nutzers.</li>
-      <li><strong>Lernförderlichkeit:</strong> Die Software unterstützt den Nutzer beim Erlernen der Funktionen.</li>
-      <li><strong>Steuerbarkeit:</strong> Nutzer kann Ablauf, Geschwindigkeit und Richtung beeinflussen.</li>
-      <li><strong>Fehlertoleranz:</strong> Erwartetes Ziel wird trotz fehlerhafter Eingabe erreicht (z.B. Autokorrektur, Undo).</li>
-      <li><strong>Individualisierbarkeit:</strong> Anpassbar an Nutzerbedürfnisse (z.B. Darkmode, Shortcuts).</li>
-    </ul>
-
-    <h4>2. Barrierefreiheit (Accessibility)</h4>
-    <p>Software und Websites müssen für Menschen mit Einschränkungen (Sehen, Hören, Motorik, Kognition) nutzbar sein. Relevant ist hier die <strong>BITV 2.0</strong> (Behörden) und die <strong>WCAG 2.1</strong> (Web Content Accessibility Guidelines). Die 4 Prinzipien (POUR):</p>
-    <ul>
-      <li><strong>Perceivable (Wahrnehmbar):</strong> Text-Alternativen (Alt-Tags) für Bilder, ausreichender Farbkontrast.</li>
-      <li><strong>Operable (Bedienbar):</strong> Alles muss per Tastatur erreichbar sein, genug Zeit für Eingaben, Tab-Reihenfolge.</li>
-      <li><strong>Understandable (Verständlich):</strong> Einfache Sprache, klare Fehlermeldungen, vorhersehbares Verhalten.</li>
-      <li><strong>Robust (Robust):</strong> Kompatibel mit Assistenztechnologien (Screenreader via ARIA).</li>
-    </ul>
-
-    <h4>3. Design-Prozess</h4>
-    <ul>
-      <li><strong>Wireframes:</strong> "Skelett" der UI. Grober Aufbau, Graustufen, Fokus auf Struktur.</li>
-      <li><strong>Mockup:</strong> Statische Design-Skizze mit Farben, Typografie und Bildern.</li>
-      <li><strong>Prototyp:</strong> Klickbar, simuliert die Interaktionen (Flow) der finalen App.</li>
-    </ul>
-  `,
-
-  // --- PB 2: Entwicklung und Umsetzung von Algorithmen ---
-  '2.1': `
-    <h3>Algorithmen & Programmierung</h3>
-    <p>Von der Logikkonzeption bis zur fehlerfreien Implementierung.</p>
-
-    <h4>1. Logik-Darstellung</h4>
-    <ul>
-      <li><strong>Struktogramme (Nassi-Shneiderman):</strong> Zeigen den Ablaufbaustein für Baustein (Sequenz, Verzweigung/IF, Schleife/WHILE). Wichtig in der AP2: Oft musst du vorgegebenen Code in ein Struktogramm überführen oder umgekehrt.</li>
-      <li><strong>Aktivitätsdiagramm (UML):</strong> Rauten für Entscheidungen (inkl. Guards in eckigen Klammern <code>[Bedingung]</code>). Breite schwarze Balken (Fors/Join) für parallele Abläufe.</li>
-    </ul>
-
-    <h4>2. Such- und Sortieralgorithmen</h4>
-    <ul>
-      <li><strong>Bubble Sort:</strong> Vergleicht benachbarte Elemente und tauscht sie bei falscher Reihenfolge. (Ineffizient, O(n^2)).</li>
-      <li><strong>Selection Sort (MinSort):</strong> Sucht das kleinste Element im Array und setzt es ganz nach vorne.</li>
-      <li><strong>Insertion Sort:</strong> Fügt das nächste Element an der passenden Stelle in den bereits sortierten vorderen Teil ein.</li>
-      <li><strong>Lineare Suche:</strong> Geht Element für Element durch. (Dauer im Worst-Case = n).</li>
-      <li><strong>Binäre Suche:</strong> Funktioniert <em>nur bei sortierten Listen</em>. Teilt die Liste in der Mitte, prüft ob gesuchter Wert größer oder kleiner ist, halbiert erneut. (Sehr effizient, O(log n)).</li>
-    </ul>
-
-    <h4>3. Rekursion vs. Iteration</h4>
-    <ul>
-      <li><strong>Iteration:</strong> Schleifenbetrieben (<code>for</code>, <code>while</code>). Speicherschonend.</li>
-      <li><strong>Rekursion:</strong> Eine Funktion, die sich selbst aufruft. Benötigt eine <strong>Abbruchbedingung</strong> (Base Case), sonst droht ein Stack Overflow.</li>
-    </ul>
-
-    <h4>4. Fehlerbehandlung (Exception Handling)</h4>
-    <p>Nutze <code>try { ... } catch (Exception e) { ... } finally { ... }</code>.</p>
-    <ul>
-      <li><strong>try:</strong> Gefährlicher Code (z.B. Dateizugriff, DB-Connect).</li>
-      <li><strong>catch:</strong> Block, der ausgeführt wird, wenn der Fehler auftritt. Hier Loggen!</li>
-      <li><strong>finally:</strong> Wird <em>immer</em> ausgeführt (auch bei Return oder Fehler), z.B. Ressourcen schließen (Connection close).</li>
-    </ul>
-  `,
-
-  '2.2': `
-    <h3>Datenbank-Design & Normalisierung</h3>
-    <p>Von der Anforderungsanalyse zum soliden relationalen Datenbankschema.</p>
-
-    <h4>1. ER-Modell (Entity-Relationship-Model nach Chen)</h4>
-    <ul>
-      <li><strong>Entitäten:</strong> Objekt, über das Daten gespeichert werden (Rechteck), z.B. <code>Kunde</code>.</li>
-      <li><strong>Attribute:</strong> Eigenschaften (Oval), z.B. <code>Vorname</code>, Primärschlüssel unterstrichen.</li>
-      <li><strong>Relationen:</strong> Beziehung zwischen Entitäten (Raute), z.B. <code>bestellt</code>.</li>
-      <li><strong>Kardinalitäten (Chen-Notation):</strong> <code>1:1</code>, <code>1:n</code> (Ein Kunde bestellt n Artikel), <code>m:n</code> (Mehrere Schüler besuchen mehrere Kurse).</li>
-    </ul>
-
-    <h4>2. Vom ERM zum Relationalen Modell</h4>
-    <ul>
-      <li><strong>1:1</strong>: Den Primary Key (PK) der einen Tabelle als Foreign Key (FK) in die andere setzen.</li>
-      <li><strong>1:n</strong>: Der PK der "1"-Seite wird als FK in der Tabelle der "n"-Seite eingetragen. (z.B. Kunden_ID landet als FK in tbl_Bestellungen).</li>
-      <li><strong>m:n</strong>: Muss <strong>zwingend</strong> in eine Kreuztabelle/Verknüpfungstabelle aufgelöst werden! Die neue Tabelle enthält die PKs beider Tabellen als FK, welche zusammen einen zusammengesetzten PK bilden.</li>
-    </ul>
-
-    <h4>3. Normalisierung</h4>
-    <p>Ziel: Vermeidung von Redundanzen (doppelte Daten) und Anomalien (Einfüge-, Änderungs-, Löschanomalie).</p>
-    <ul>
-      <li><strong>Nullte Normalform (0. NF):</strong> Daten unsortiert (z.B. in einer Excel-Tabelle), Mehrfachfelder erlaubt.</li>
-      <li><strong>Erste Normalform (1. NF):</strong> Atomarität. Alle Attribute sind unteilbar (z.B. 'Name' aufteilen in 'Vorname' und 'Nachname'). Pro Feld nur EIN Wert, keine Mengen/Listen! Jeder Datensatz hat einen PK.</li>
-      <li><strong>Zweite Normalform (2. NF):</strong> Ist in 1.NF + Jedes Nicht-Schlüssel-Attribut muss voll funktional abhängig vom <em>gesamten</em> (zusammengesetzten) Primärschlüssel sein. (Falls ein Attribut nur von einem Teil des PKs abhängt, muss es in eine neue Tabelle ausgelagert werden).</li>
-      <li><strong>Dritte Normalform (3. NF):</strong> Ist in 2.NF + Keine transitiven Abhängigkeiten. Kein Nicht-Schlüssel-Attribut darf von einem anderen Nicht-Schlüssel-Attribut abhängen (z.B. PLZ &rarr; Ort. Ort auslagern in Tabelle tbl_PlzOrt, PLZ bleibt als FK).</li>
-    </ul>
-
-    <h4>4. Referenzielle Integrität</h4>
-    <p>Regel, die sicherstellt, dass Fremdschlüssel nur Werte annehmen dürfen, die als Primärschlüssel in der referenzierten Tabelle existieren (Keine verwaisten Datensätze).</p>
-    <ul>
-      <li><strong>ON DELETE CASCADE:</strong> Wird Eltern-Datensatz gelöscht, werden alle Kinder auch gelöscht.</li>
-      <li><strong>ON DELETE SET NULL:</strong> Foreign Key der Kinder wird auf NULL gesetzt.</li>
-    </ul>
-  `,
-
-  '2.3': `
-    <h3>Fortgeschrittenes SQL</h3>
-    <p>Datenabfrage (DQL), Datenmanipulation (DML), Datendefinition (DDL) und Zugriffssteuerung (DCL).</p>
-
-    <h4>1. JOINs - Tabellen verknüpfen</h4>
-    <ul>
-      <li><strong>INNER JOIN:</strong> Liefert Schnittmenge. Nur Datensätze, bei denen ein Match in beiden Tabellen vorliegt.</li>
-      <li><strong>LEFT (OUTER) JOIN:</strong> Liefert <em>alle</em> Datensätze der linken Tabelle und die gematchten der rechten. Wo es rechts keinen Match gibt, steht <code>NULL</code> (Sehr wichtig für "Welche Kunden haben noch nie bestellt?").</li>
-      <li><strong>RIGHT JOIN:</strong> Analog zu Left Join.</li>
-      <li><strong>FULL JOIN:</strong> Liefert alles von links und rechts (Schnitt- inkl. Restmenge).</li>
-      <li><strong>SELF JOIN:</strong> Die Tabelle wird mit sich selbst verknüpft (z.B. Mitarbeiterstruktur: Mitarbeiter.Chef_ID = Mitarbeiter.Mitarbeiter_ID. Erfordert <em>Aliase</em> <code>M1</code>, <code>M2</code>).</li>
-    </ul>
-
-    <h4>2. Aggregatfunktionen & Gruppierung</h4>
-    <p>Funktionen, die mehrere Zeilen zu einem Ergebnis zusammenfassen: <code>COUNT()</code>, <code>SUM()</code>, <code>AVG()</code>, <code>MIN()</code>, <code>MAX()</code>.</p>
-    <ul>
-      <li>Sobald eine Aggregatfunktion genutzt wird, <strong>müssen alle nicht-aggregierten Spalten im <code>SELECT</code> zwingend im <code>GROUP BY</code> stehen!</strong></li>
-      <li><strong>HAVING:</strong> Ist wie <code>WHERE</code>, aber für aggregierte Daten. (Erst wird gefiltert [WHERE], dann gruppiert [GROUP BY], dann auf Gruppen-Bedingungen gefiltert [HAVING]).</li>
-    </ul>
-
-    <h4>3. DML / DDL / TCL Statements</h4>
-    <ul>
-      <li><strong>DML (Manipulation):</strong> <code>INSERT INTO ... VALUES (...)</code>, <code>UPDATE ... SET ... WHERE</code>, <code>DELETE FROM ... WHERE</code>.</li>
-      <li><strong>DDL (Definition):</strong> <code>CREATE TABLE tbl (...)</code>, <code>ALTER TABLE tbl ADD/DROP COLUMN</code>, <code>DROP TABLE ...</code></li>
-      <li><strong>TCL (Transaktionen):</strong> <code>BEGIN TRANSACTION</code>, <code>COMMIT</code> (speichern), <code>ROLLBACK</code> (rückgängig machen bei Fehler). Ein Commit stellt das ACID-Prinzip sicher.</li>
-    </ul>
-
-    <h4>4. ACID-Prinzip bei Transaktionen</h4>
-    <ul>
-      <li><strong>A (Atomicity):</strong> Ganz oder gar nicht (Unteilbarkeit).</li>
-      <li><strong>C (Consistency):</strong> Nach der Transaktion muss die DB in einem konsistenten Zustand gemäß Constraints sein.</li>
-      <li><strong>I (Isolation):</strong> Parallel ablaufende Transaktionen dürfen sich nicht beeinflussen.</li>
-      <li><strong>D (Durability):</strong> Bestätigte Transaktionen bleiben dauerhaft (auch bei Stromausfall).</li>
-    </ul>
-
-    <h4>5. Indizes & Views</h4>
-    <ul>
-      <li><strong>Index:</strong> Beschleunigt das Lesen drastisch (B-Baum Struktur), verlangsamt aber Schreib-Operationen (INSERT/UPDATE/DELETE). Primärschlüssel werden automatisch indiziert.</li>
-      <li><strong>View (Sicht):</strong> Eine als Objekt in der DB gespeicherte SELECT-Abfrage (Virtuelle Tabelle). Vorteil: Kapselt komplexe Joins, erhöht Sicherheit (Beschränkung auf bestimmte Spalten), speichert selbst keine Daten (außer Materialized Views).</li>
-    </ul>
-  `,
-
-  // --- PB 3: Fachrichtungsübergreifend ---
-  '3.1': `
-    <h3>Netzwerktechnik & Cloud</h3>
-
-    <h4>1. Das OSI-Modell</h4>
-    <p>Das Referenzmodell für Netzwerkprotokolle (7 Schichten):</p>
-    <ol>
-      <li><strong>Physical Layer (Bitübertragung):</strong> Kabel, Stecker, Hubs (Bits, 0/1).</li>
-      <li><strong>Data Link Layer (Sicherungsschicht):</strong> MAC-Adressen, Error-Detection, Switches (Frames).</li>
-      <li><strong>Network Layer (Vermittlungsschicht):</strong> IP-Adressen, Routing, Router (Pakete). Wichtigste Schicht für Entwickler (IP)!</li>
-      <li><strong>Transport Layer (Transportschicht):</strong> TCP (zuverlässig, verbindungsortieniert, 3-Way-Handshake) vs. UDP (schnell, verbindungslos, z.B. Streaming, DNS), Ports (Segmente/Datagramme).</li>
-      <li><strong>Session Layer (Sitzungsschicht):</strong> Sitzungsaufbau/-abbau.</li>
-      <li><strong>Presentation Layer (Darstellungsschicht):</strong> Verschlüsselung, Datenkompression (ASCII, JPEG, SSL/TLS).</li>
-      <li><strong>Application Layer (Anwendungsschicht):</strong> Interaktion mit Benutzer (HTTP, FTP, SMTP, DNS) (Daten).</li>
-    </ol>
-
-    <h4>2. Wichtige Protokolle & Ports</h4>
-    <ul>
-      <li><strong>DNS (Domain Name System, Port 53, meist UDP):</strong> Übersetzt Namen (google.de) in IP-Adressen. Rekursiver Name Server (Provider) fragt für dich bis zum Root-Server (Iterativ).</li>
-      <li><strong>DHCP (Port 67/68, UDP):</strong> Automatische Vergabe von IP-Adressen (DORA-Prinzip: Discover, Offer, Request, Acknowledge).</li>
-      <li><strong>HTTP/HTTPS (Port 80/443, TCP)</strong>.</li>
-      <li><strong>SSH (Port 22, TCP):</strong> Sichere Shell. / <strong>FTP (Port 20/21, TCP)</strong>: File Transfer.</li>
-    </ul>
-
-    <h4>3. IPv6 & Subnetting Bascis</h4>
-    <ul>
-      <li><strong>IPv4:</strong> 32 Bit (z.B. 192.168.1.1). Ausgeschöpft.</li>
-      <li><strong>IPv6:</strong> 128 Bit, hexadezimal notiert. Enorm großer Adressraum, IPsec standardmäßig integriert, kein NAT mehr zwingend nötig.</li>
-    </ul>
-
-    <h4>4. Virtualisierung & Cloud</h4>
-    <ul>
-      <li><strong>Hypervisor Typ 1 (Bare Metal):</strong> Läuft direkt auf der Hardware (z.B. VMware ESXi, Proxmox). Höhere Perfomance.</li>
-      <li><strong>Hypervisor Typ 2 (Hosted):</strong> Läuft auf einem Host-OS (z.B. VirtualBox, VMware Workstation).</li>
-      <li><strong>Container (Docker):</strong> Teilen sich den Kernel des Host-OS (Betriebssystem-Virtualisierung). Wesentlich leichtgewichtiger, starten in Millisekunden.</li>
-      <li><strong>Cloud-Modelle:</strong>
-        <ul>
-          <li><code>IaaS</code> (Infrastructure): Du bekommst Blanko-Server/VMs (z.B. AWS EC2). OS pflegen tust DU.</li>
-          <li><code>PaaS</code> (Platform): Du lieferst Code, Plattform stellt Runtime (z.B. Heroku, AWS Beanstalk). OS pflegt PROVIDER.</li>
-          <li><code>SaaS</code> (Software): Komplett fertige App (z.B. M365, Salesforce).</li>
+      </div>
+      <div>
+        <strong class="text-white block mb-2 border-b border-dark-border pb-1">Betriebsrat (BetrVG)</strong>
+        <ul class="text-xs text-gray-400 space-y-1">
+          <li>Wählbar ab 5 Mitarbeitern.</li>
+          <li><strong class="text-dark-success">Mitbestimmung:</strong> Zwingende Zustimmung (Überstunden, URL).</li>
+          <li><strong class="text-dark-warning">Mitwirkung:</strong> Muss angehört werden (Kündigungen! Ohne BR unwirksam).</li>
         </ul>
-      </li>
-    </ul>
+      </div>
+    </div>
+  </details>
+</div>
   `,
 
-  '3.2': `
-    <h3>IT-Sicherheit (Security)</h3>
-
-    <h4>1. Die 4 Schutzziele</h4>
-    <ol>
-      <li><strong>Vertraulichkeit (Confidentiality):</strong> Daten sind nur für Befugte lesbar (Maßnahme: Verschlüsselung, Rechtekonzept).</li>
-      <li><strong>Integrität (Integrity):</strong> Daten dürfen nicht unbemerkt verändert/verfälscht werden (Maßnahme: Hashing, Digitale Signatur).</li>
-      <li><strong>Verfügbarkeit (Availability):</strong> Systeme müssen jederzeit für Benutzer erreichbar sein (Maßnahme: RAID, Backups, USV, Load-Balancing).</li>
-      <li><strong>Authentizität (Authenticity):</strong> Der Kommunikationspartner ist tatsächlich der, der er vorgibt zu sein (Maßnahme: Zertifikate, Signaturen).</li>
-    </ol>
-
-    <h4>2. Kryptografie (Verschlüsselung & Hashing)</h4>
-    <ul>
-      <li><strong>Symmetrisch (z.B. AES 256):</strong> <em>Ein</em> Schlüssel zum Ver-/Entschlüsseln. Extrem schnell. <em>Problem:</em> Wie tauscht man den Schlüssel sicher aus?</li>
-      <li><strong>Asymmetrisch (z.B. RSA):</strong> Schlüsselpaar aus Private Key (geheim) und Public Key (öffentlich). Verschlüsselt man mit dem Public Key, kann <em>nur</em> der Private Key dechiffrieren. Langsam! Löst das Schlüsseltauschproblem.</li>
-      <li><strong>Hybride Verschlüsselung (TLS/SSL):</strong> Nutzt Asymmetrisch zum sicheren Austausch eines Session-Keys (Symmetrisch). Danach wird der schnelle symmetrische Key für die Dauer der Sitzung für die eigentlichen Daten (AES) genutzt.</li>
-      <li><strong>Hashing (z.B. SHA-256, bcrypt für Passwörter):</strong> <em>Einweg-Funktion!</em> Aus Text wird ein Hash generiert fester Länge. Aus dem Hash kann nicht der Klartext berechnet werden (Keine Entschlüsselung möglich!). Dient zur Prüfung der Integrität (z.B. Passwortabgleich).</li>
-    </ul>
-
-    <h4>3. Digitale Signatur</h4>
-    <p>Dient zum Nachweis der Integrität und des Urhebers:</p>
-    <ol>
-      <li>Sender hasht das Dokument.</li>
-      <li>Sender verschlüsselt den Hash <strong>mit seinem Private Key!</strong> = Signatur.</li>
-      <li>Dokument + Signatur senden.</li>
-      <li>Empfänger entschlüsselt Signatur mit Public Key des Senders &rarr; erhält den Hash.</li>
-      <li>Empfänger hasht Dokument selbst und vergleicht beide Hashes. Match = Integrität & Authentizität bestätigt.</li>
-    </ol>
-
-    <h4>4. Wichtige Web-Angriffe & Abwehr</h4>
-    <ul>
-      <li><strong>SQL-Injection:</strong> Einschleusen von Schadcode über Inputfelder. <em>Abwehr:</em> Prepared Statements / Parameterized Queries. Niemals Strings zusammenbauen (String-Konkatenation).</li>
-      <li><strong>XSS (Cross-Site Scripting):</strong> Einschleusen von bösem JavaScript in die Webseite (z.B. im Gästebuch), das bei anderen Nutzern ausgeführt wird und z.B. Session-Cookies klaut. <em>Abwehr:</em> HTML-Encoding, Output-Sanitization.</li>
-      <li><strong>CSRF (Cross-Site Request Forgery):</strong> Angreifer trickst Nutzer aus, unbemerkt Aktionen auszuführen (z.B. via Image-Tag). <em>Abwehr:</em> CSRF-Tokens (Anti-Forgery-Tokens in Forms).</li>
-    </ul>
+    '4.2': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+        <i class="fa-solid fa-store"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Der Betrieb & Markt</h3>
+        <p class="text-sm text-dark-muted m-0">Unternehmensformen, Marktmechanismen und Marketing</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+    <h4 class="text-lg font-bold text-white mb-4"><i class="fa-regular fa-building text-emerald-400 mr-2"></i>1. Rechtsformen im Überblick</h4>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="bg-dark-card p-3 rounded border border-dark-border">
+        <strong class="text-sm text-dark-warning block mb-1">Personengesellschaften</strong>
+        <p class="text-[10px] text-gray-400 m-0">GbR, OHG, Einzelkaufmann. Kein Mindestkapital. <strong class="text-dark-danger">Vollhaftung (Privatvermögen)!</strong></p>
+      </div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border">
+        <strong class="text-sm text-dark-success block mb-1">GmbH (Kapital)</strong>
+        <p class="text-[10px] text-gray-400 m-0">25.000 € Stammkapital. Haftung nur mit Firmenvermögen. Notar + Handelsregister B.</p>
+      </div>
+      <div class="bg-dark-card p-3 rounded border border-dark-border">
+        <strong class="text-sm text-dark-success block mb-1">AG (Kapital)</strong>
+        <p class="text-[10px] text-gray-400 m-0">50.000 € Grundkapital. Aktien handelbar. Vorstand (Geschäftsführung) & Aufsichtsrat.</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-chart-line text-blue-400 mr-2"></i>2. Markt & Wettbewerb</h4>
+      <div class="space-y-2 text-xs">
+        <div class="flex justify-between items-center border-b border-dark-border pb-1"><strong class="text-blue-400">Preisbildung</strong><span class="text-gray-400 text-right">Schnittpunkt Angebot & Nachfrage</span></div>
+        <div class="flex justify-between items-center border-b border-dark-border py-1"><strong class="text-dark-danger">Monopol</strong><span class="text-gray-400 text-right">1 Anbieter, viele Nachfrager</span></div>
+        <div class="flex justify-between items-center border-b border-dark-border py-1"><strong class="text-dark-warning">Oligopol</strong><span class="text-gray-400 text-right">Wenige Anbieter (z.B. Mobilfunk)</span></div>
+        <div class="flex justify-between items-center py-1"><strong class="text-dark-success">Polypol</strong><span class="text-gray-400 text-right">Viele Anbieter & Nachfrager (Ideal)</span></div>
+      </div>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-bullhorn text-purple-400 mr-2"></i>3. Marketing (4 P's)</h4>
+      <ul class="text-xs text-gray-400 space-y-2">
+        <li><strong class="text-white">Product (Produkt):</strong> Was verkaufe ich? (Design, Features).</li>
+        <li><strong class="text-white">Price (Preis):</strong> Zu welchem Preis? (Rabatte, Skimming).</li>
+        <li><strong class="text-white">Place (Distribution):</strong> Wie vertreibe ich es? (Download, App Store).</li>
+        <li><strong class="text-white">Promotion (Kommunikation):</strong> Wie mache ich es bekannt? (SEO, Ads).</li>
+      </ul>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>4. Betriebsziele & Zielkonflikte</summary>
+    <div class="lz-content">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-3 text-center">
+        <div class="bg-dark-card border border-dark-border p-2 rounded"><strong class="text-xs text-white block">Ökonomisch</strong><p class="text-[10px] text-gray-400 m-0">Gewinn/Umsatz.</p></div>
+        <div class="bg-dark-card border border-dark-border p-2 rounded"><strong class="text-xs text-white block">Ökologisch</strong><p class="text-[10px] text-gray-400 m-0">Green-IT, Umweltschutz.</p></div>
+        <div class="bg-dark-card border border-dark-border p-2 rounded"><strong class="text-xs text-white block">Sozial</strong><p class="text-[10px] text-gray-400 m-0">Arbeitschutz, gerechter Lohn.</p></div>
+      </div>
+      <p class="text-[10px] text-gray-500 text-center m-0"><strong>Zielkonflikt:</strong> Ziele widersprechen sich oft (Kostensenkung vs. Ökologie/Soziales).</p>
+    </div>
+  </details>
+</div>
   `,
 
-  '3.3': `
-    <h3>Qualitätssicherung & DevOps</h3>
-
-    <h4>1. Teststufen (Das V-Modell)</h4>
-    <ol>
-      <li><strong>Modultest / Unit-Test:</strong> Isoliertes Testen der kleinsten Softwarebausteine (z.B. eine Methode). Häufig durch Mocks/Stubs isoliert. White-Box-Ansatz. (Verantwortlich: Entwickler)</li>
-      <li><strong>Integrationstest:</strong> Testet das Zusammenspiel mehrerer Module oder Subsysteme. (Verantwortlich: Entwickler/Tester)</li>
-      <li><strong>Systemtest:</strong> Testet das Gesamtsystem gegen die definierten Anforderungen im Pflichtenheft unter produktionsähnlichen Bedingungen. Black-Box-Ansatz. (Tester)</li>
-      <li><strong>Abnahmetest (Akzeptanztest):</strong> Testet, ob die Software den Bedürfnissen des Kunden entspricht. (Verantwortlich: Kunde / Product Owner).</li>
-    </ol>
-
-    <h4>2. Testmethoden & Metriken</h4>
-    <ul>
-      <li><strong>Black-Box-Test:</strong> Tester kennt den Quellcode nicht. Testet Input vs. Output (funktionale Anforderungen).</li>
-      <li><strong>White-Box-Test:</strong> Tester kennt Sourcecode. Testet internen Logikfluss (If-Zweige, Schleifen).</li>
-      <li><strong>Äquivalenzklassenbildung:</strong> (Black-Box Methode) Eingaben in Klassen aufteilen, bei denen das Programm sich gleich verhalten soll. Man testet pro Klasse nur 1-2 Werte, um Aufwand zu reduzieren (z.B. Gültig: 1-100, Ungültig: <1, Ungültig: >100).</li>
-      <li><strong>Grenzwertanalyse:</strong> (Black-Box) Testet exakt an den Rändern der Äquivalenzklassen (z.B. 0, 1, 100, 101), da dort meist Off-By-One-Fehler passieren (<= vs <).</li>
-      <li><strong>Code Coverage (C0, C1, C2):</strong> 
-        <ul>
-          <li>Zeilenabdeckung (C0, Statement Coverage): % der ausgeführten Zeilen (schwach).</li>
-          <li>Zweigabdeckung (C1, Branch Coverage): Wurde jede Verzweigung (True/False) mind. 1x durchlaufen? (Standard).</li>
-          <li>Bedingungsabdeckung (C2, Condition / Path Coverage): Jede Teildebedingung im IF wurde separat auf True/False getestet. (Sehr stark).</li>
+    '4.3': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+        <i class="fa-solid fa-file-invoice-dollar"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Finanzierung & Buchführung</h3>
+        <p class="text-sm text-dark-muted m-0">Rechnungen, Kapital und Kosten-Leistungs-Rechnung</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-receipt text-indigo-400 mr-2"></i>1. Rechnungs-Elemente (Pflicht)</h4>
+      <p class="text-[10px] text-gray-400 mb-3">Nach § 14 UStG, bei Rechnungen über 250 € brutto:</p>
+      <ul class="text-[10px] text-gray-300 space-y-2">
+        <li><strong class="text-blue-400">Adressen:</strong> Vollständiger Name/Anschrift (Sender & Empfänger).</li>
+        <li><strong class="text-blue-400">Nummern:</strong> Steuernummer (oder USt-IdNr), fortlaufende Rechnungsnummer.</li>
+        <li><strong class="text-blue-400">Zeiten:</strong> Ausstellungsdatum, Liefer-/Leistungsdatum.</li>
+        <li><strong class="text-blue-400">Leistung:</strong> Menge (Lizenzen, Stunden) und Art (Support).</li>
+        <li><strong class="text-dark-warning">Werte:</strong> Netto-Entgelt, Steuersatz (z.B. 19%) und Umsatzsteuerbetrag separat!</li>
+      </ul>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-coins text-yellow-400 mr-2"></i>2. Finanzierungsarten</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Innenfinanzierung</strong>
+          <p class="text-[10px] text-gray-400 m-0">Kapital generiert sich intern (Gewinneineinbehalt, Verkauf von Alt-Servern).</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Außen (Fremdfinanzierung)</strong>
+          <p class="text-[10px] text-gray-400 m-0">Kredit (Zinsen, kein Mitspracherecht) oder Leasing.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Außen (Eigenkapital/Beteiligung)</strong>
+          <p class="text-[10px] text-gray-400 m-0">Neuer Investor (Frisches Geld, will aber Mitspracherecht/Rendite).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <details class="lz-details">
+    <summary>3. Umsatzsteuer & KLR (Kostenrechnung)</summary>
+    <div class="lz-content grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div>
+        <strong class="text-white block mb-2 border-b border-dark-border pb-1">Umsatzsteuer & Vorsteuer</strong>
+        <p class="text-[10px] text-gray-400 mb-2">Für Unternehmen ein "durchlaufender Posten".</p>
+        <ul class="text-[10px] text-gray-300 space-y-1">
+          <li><strong>Vorsteuer:</strong> Zahlst DU beim Einkauf (z.B. Laptop).</li>
+          <li><strong>Umsatzsteuer:</strong> Schlägst DU beim Verkauf drauf (Kunde zahlt).</li>
+          <li><strong>Zahllast ans FA =</strong> Umsatzsteuer (eingenommen) - Vorsteuer (bezahlt).</li>
         </ul>
-      </li>
-    </ul>
-
-    <h4>3. TDD - Test Driven Development</h4>
-    <p>Ablauf (Red, Green, Refactor):</p>
-    <ol>
-      <li>Test schreiben (und fehlschlagen sehen -> Red).</li>
-      <li>Mindestcode schreiben, um Test zu bestehen (-> Green).</li>
-      <li>Code optimieren (Refactoring), Tests müssen grün bleiben.</li>
-    </ol>
-
-    <h4>4. Versionsverwaltung (Git)</h4>
-    <ul>
-      <li>Zentrale Architektur vs. Dezentral/Verteilt (bei Git hat jeder den vollen Quellcode lokal).</li>
-      <li><strong>Befehle:</strong> 
-        <code>add</code> (in Staging Area packen), 
-        <code>commit</code> (Lokal ins Repo snapshotten), 
-        <code>push</code> (auf Remote-Server wie GitHub hochladen), 
-        <code>pull</code> (Updates vom Server laden), 
-        <code>branch</code> (Abzweigung erzeugen), 
-        <code>merge</code> (Zweige zusammenführen, erzeugt Merge-Commit).
-      </li>
-    </ul>
+      </div>
+      <div>
+        <strong class="text-white block mb-2 border-b border-dark-border pb-1">Kosten & Break-Even</strong>
+        <ul class="text-[10px] text-gray-300 space-y-1">
+          <li><strong>Fixkosten (Kf):</strong> Miete. Sind immer da.</li>
+          <li><strong>Variable Kosten (Kv):</strong> Softwarelizenzen pro User. Steigen mit Menge (x).</li>
+          <li><code class="text-dark-warning rounded">K = Kf + (Kv * x)</code></li>
+          <li><strong>Break-Even-Point:</strong> Gewinnschwelle. Ab hier machst du Gewinn (Umsatz = Gesamtkosten).<br><code class="text-dark-success mt-1 inline-block">Menge = Fixkosten / (Stückpreis - Var. Stückkosten)</code></li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</div>
   `,
 
-  '3.4': `
-    <h3>Datenschutz (DSGVO) & Recht</h3>
-
-    <h4>1. Die DSGVO-Prinzipien (Art. 5)</h4>
-    <p>Die Verarbeitung personenbezogener Daten muss zwingend diesen Prinzipien folgen:</p>
-    <ul>
-      <li><strong>Rechtmäßigkeit & Transparenz:</strong> Es braucht immer eine Erlaubnis (Erlaubnisvorbehalt): Z.B. Einwilligung, Vertragserfüllung oder berechtigtes Interesse. Der Betroffene muss informiert werden.</li>
-      <li><strong>Zweckbindung:</strong> Daten dürfen nur für den bei Erhebung festgelegten, legitimen Zweck verarbeitet werden.</li>
-      <li><strong>Datenminimierung (Datensparsamkeit):</strong> Nur sammeln, was zwingend nötig ist (z.B. für Newsletter reicht E-Mail, kein Geburtsdatum).</li>
-      <li><strong>Richtigkeit:</strong> Daten müssen aktuell und korrekt gehalten werden.</li>
-      <li><strong>Speicherbegrenzung:</strong> Sobald der Zweck wegfällt, müssen Daten gelöscht werden (Ausnahme: Gesetzliche Aufbewahrungsfristen von z.B. 10 Jahren bei Rechnungen [HGB]).</li>
-      <li><strong>Integrität & Vertraulichkeit (TOMs):</strong> Daten müssen technisch und organisatorisch vor unbefugtem Zugriff gesichert werden (Verschlüsselung, Zugangskontrolle).</li>
-    </ul>
-
-    <h4>2. Wichtige Konzepte der DSGVO</h4>
-    <ul>
-      <li><strong>Betroffenenrechte:</strong> Recht auf Auskunft (Art. 15), Recht auf vergessene werden / Löschung (Art. 17), Recht auf Datenübertragbarkeit.</li>
-      <li><strong>Besondere Kategorien von Daten (Art. 9):</strong> (Gesundheitsdaten, Biometrie, Religion, Politische Meinung) <em>Besonders streng geschützt!</em> Hier bedarf es zwingend einer ausdrücklichen Einwilligung.</li>
-      <li><strong>Auftragsverarbeitungsvertrag (AVV):</strong> MUSS geschlossen werden, wenn Personendaten von einem externen Dienstleister verarbeitet werden (z.B. Cloud-Hoster, externes Lohnbüro).</li>
-      <li><strong>Datenschutzbeauftragter (DSB):</strong> Pflicht in der Regel ab 20 Mitarbeitern, die ständig mit automatisierter Datenverarbeitung beschäftigt sind. Darf kein Geschäftsführer sein (Interessenkonflikt).</li>
-    </ul>
-
-    <h4>3. Urheberrecht / Lizenzen</h4>
-    <p>Software ("Werke") ist urheberrechtlich geschützt ab Zeitpunkt der Schaffung.</p>
-    <ul>
-      <li><strong>Proprietär:</strong> EULA (End User License Agreement), Nutzungsrecht erkauft.</li>
-      <li><strong>Open Source - Permissiv:</strong> (MIT, Apache) -> Man darf Code ändern, gewerblich nutzen und auch als proprietäre Software weiterverkaufen/verschließen ("Copycenter").</li>
-      <li><strong>Open Source - Restriktiv (Copyleft):</strong> (GPL - Gnu Public License) -> Man darf Code nutzen, ABER: Wenn man ihn modifiziert und veröffentlicht, muss zwingend das Gesamtwerk wieder unter derselben Open Source Lizenz stehen ("Virale Lizenz").</li>
-    </ul>
-  `,
-
-  // --- PB 4: Wirtschafts- und Sozialkunde ---
-  '4.1': `
-    <h3>Arbeits- & Tarifrecht</h3>
-    
-    <h4>1. Gesetzliche Rahmenbedingungen</h4>
-    <ul>
-      <li><strong>Arbeitszeitgesetz (ArbZG):</strong> Regelt Pausen (nach 6h mind. 30 Min, nach 9h mind. 45 Min). Max 8h / max 10h bei Ausgleich. Ruhezeit nach Schicht: mind. 11h.</li>
-      <li><strong>Jugendarbeitsschutzgesetz (JArbSchG):</strong> Für unter 18-Jährige. Max 5 Tage/Woche, max 40h, max 8h/Tag. Keine Wochenendarbeit. Mehr Urlaub.</li>
-      <li><strong>Kündigungsschutzgesetz (KSchG):</strong> Greift i.d.R. nach 6 Monaten Probezeit in Betrieben mit >10 Vollzeit-Mitarbeitern. Kündigung nur zulässig, wenn personenbedingt, verhaltensbedingt (Abmahnung vorher nötig!) oder betriebsbedingt (Sozialauswahl!).</li>
-      <li><strong>Kündigungsfristen (Gesetzlich BGB):</strong> Arbeitnehmer -> 4 Wochen zum 15. oder Ende d.M.</li>
-    </ul>
-
-    <h4>2. Ausbildungsvertrag (BBiG)</h4>
-    <ul>
-      <li>Muss vor Ausbildungsbeginn schriftlich geschlossen sein.</li>
-      <li>Probezeit zwingend: 1 - 4 Monate. Kündigung in der Probezeit ohne Grund von Tag auf Tag fristlos möglich.</li>
-      <li>Nach Probezeit: Azubi kündigt mit 4 Wochen Frist (Berufsaufgabe/-wechsel). Betrieb kann nur fristlos kündigen (Wichtiger Grund wie Diebstahl) - ordentlich ist der Azubi quasi unkündbar!</li>
-    </ul>
-
-    <h4>3. Tarifrecht & Mitbestimmung</h4>
-    <ul>
-      <li><strong>Tarifautonomie:</strong> Staat mischt sich nicht ein. Gewerkschaften (Arbeitnehmer) und Arbeitgeberverbände handeln Tarife aus (Manteltarifvertrag für URL/Schichten, Lohn-/Gehaltstarifvertrag für Geld). Streikrecht.</li>
-      <li><strong>Betriebsrat (Betriebsverfassungsgesetz - BetrVG):</strong> Kann in Betrieben ab 5 ständigen, wahlberechtigten Mitarbeitern gewählt werden. 
-        <ul>
-          <li><strong>Mitbestimmungsrechte:</strong> (Zwingend! Zustimmen nötig) bei sozialen Angelegenheiten z.B. Arbeitszeiten, Überstunden, Urlaubsplan.</li>
-          <li><strong>Mitwirkungsrechte:</strong> (Betriebsrat muss angehört werden) bei Kündigungen! Eine Kündigung ohne BR-Anhörung ist nichtig.</li>
-        </ul>
-      </li>
-    </ul>
-
-    <h4>4. Sozialversicherungen</h4>
-    <p>Beiträge werden zur Hälfte geteilt (Arbeitnehmer / Arbeitgeber), <strong>außer bei Unfallversicherung, die zahlt AG 100%.</strong></p>
-    <ol>
-      <li><strong>Krankenversicherung (KV):</strong> Krankenkassen, z.B. AOK, TK. (~14,6% + Zusatzbeitrag)</li>
-      <li><strong>Pflegeversicherung (PV):</strong> Pflegekassen. Kinderlose zahlen etwas mehr.</li>
-      <li><strong>Rentenversicherung (RV):</strong> DRV Bund (Macht mit 18,6% den größten Posten aus). (Generationenvertrag).</li>
-      <li><strong>Arbeitslosenversicherung (AV):</strong> Bundesagentur für Arbeit.</li>
-      <li><strong>Unfallversicherung (UV):</strong> Berufsgenossenschaften (Volle Kosten trägt AG!). Gilt für Arbeitsweg und Arbeit.</li>
-    </ol>
-  `,
-
-  '4.2': `
-    <h3>Der Betrieb & Markt</h3>
-
-    <h4>1. Rechtsformen im Überblick</h4>
-    <ul>
-      <li><strong>Einzelkaufmann / GbR / OHG (Personengesellschaften):</strong>
-        <ul>
-          <li>Kein Mindestkapital.</li>
-          <li>Vollhaftung! Du haftest drastisch gesagt mit Haus und Hof (Privatvermögen) + Geschäftsvermögen.</li>
-        </ul>
-      </li>
-      <li><strong>GmbH (Gesellschaft mit beschränkter Haftung) - Kapitalgesellschaft:</strong>
-        <ul>
-          <li>Mindeststammkapital: 25.000 €</li>
-          <li>Haftung nur mit dem Gesellschaftsvermögen.</li>
-          <li>Organe: Geschäftsführung, Gesellschafterversammlung.</li>
-          <li>Notarieller Vertrag & Handelsregistereintrag (Abt. B) zwingend!</li>
-        </ul>
-      </li>
-      <li><strong>AG (Aktiengesellschaft) - Kapitalgesellschaft:</strong>
-        <ul>
-          <li>Grundkapital: 50.000 €</li>
-          <li>Anteile (Aktien) handelbar.</li>
-          <li>Organe: Vorstand (Geschäftsführung), Aufsichtsrat (Überwachung), Hauptversammlung.</li>
-        </ul>
-      </li>
-    </ul>
-
-    <h4>2. Marktmechanismen & Wettbewerb</h4>
-    <ul>
-      <li><strong>Preisbildung:</strong> Entsteht dort wo Angebot und Nachfrage gleich groß sind (Gleichgewichtspreis).</li>
-      <li><strong>Monopol:</strong> Einer bietet an, viele fragen nach (Preissetzungsmacht z.B. Bahnstreckenbetrieb).</li>
-      <li><strong>Oligopol:</strong> Wenige große Anbieter, viele kleine Nachfrager (z.B. Mobilfunkmarkt, Tankstellen).</li>
-      <li><strong>Polypol:</strong> Viele Anbieter, viele Nachfrager (ideale Wettbewerbsform, z.B. Wochenmarkt, App-Developer).</li>
-    </ul>
-
-    <h4>3. Marketing (Die 4 P's)</h4>
-    <p>Marketing Mix, wichtig für IT-Projekte bei Softwarevertrieb:</p>
-    <ol>
-      <li><strong>Product (Produktpolitik):</strong> Was verkaufe ich? (Design, Qualität, Features, Marke, Verpackung)</li>
-      <li><strong>Price (Preispolitik):</strong> Wie viel verlange ich? (Rabatte, Zahlungsbedingungen, Skimming- vs. Penetration-Strategie)</li>
-      <li><strong>Place (Distributionspolitik):</strong> Wie kommt das Produkt zum Kunden? (Direktvertrieb, SaaS/Download, Partnerkanäle, App Stores)</li>
-      <li><strong>Promotion (Kommunikationspolitik):</strong> Wie wird das Produkt bekannt? (Werbung, SEO, Sponsoring, PR)</li>
-    </ol>
-
-    <h4>4. Betriebsziele</h4>
-    <ul>
-      <li><strong>Ökonomisch:</strong> Gewinnmaximierung, Umsatzsteigerung, Kostensenkung (Bsp: Wir produzieren billiger in Fernost).</li>
-      <li><strong>Ökologisch:</strong> Umweltschutz, CO2 Reduktion, Green-IT / Rechenzentrum (Bsp: Ökostrom nutzen).</li>
-      <li><strong>Sozial:</strong> Mitarbeitersicherheit, Arbeitszufriedenheit, Faire Löhne (Bsp: Homeoffice anbieten).</li>
-      <li><strong>Zielkonflikt:</strong> Ökonomische Kostensenkung beißt sich oft mit Ökologie oder Sozialzielen.</li>
-    </ul>
-  `,
-
-  '4.3': `
-    <h3>Finanzierung & Buchführung</h3>
-
-    <h4>1. Rechnungs-Elemente (Pflichtangaben)</h4>
-    <p>Nach § 14 UStG, bei Rechnungen über 250 € brutto:</p>
-    <ul>
-      <li>Vollständiger Name und Anschrift (Rechnungssteller & Rechnungsempfänger)</li>
-      <li>Steuernummer oder USt-IdNr. des leistenden Unternehmers</li>
-      <li>Fortlaufende, einmalige Rechnungsnummer & Ausstellungsdatum</li>
-      <li>Menge (Anzahl Lizenzen, Stunden) und Art (Entwicklung, Support) der Leistung</li>
-      <li>Datum/Zeitraum der Leistung/Lieferung</li>
-      <li>Entgelt netto, Steuersatz (z.B. 19%) und Umsatzsteuerbetrag separat!</li>
-    </ul>
-
-    <h4>2. Finanzierung (Welches Kapital brauche ich?)</h4>
-    <ul>
-      <li><strong>Innenfinanzierung:</strong> Kapital generiert sich von innen (z.B. Gewinne/Rücklagen werden einbehalten, Verkauf nicht benötigter Server-Anlagen -> Kapitalfreisetzung).</li>
-      <li><strong>Außenfinanzierung:</strong> Geld kommt von außen.
-        <ul>
-          <li><strong>Fremdfinanzierung:</strong> Kredit bei Bank (kostet Zinsen, kein Mitspracherecht d. Bank). Leasing (Maschine gehört mir nicht, monatliche Rate).</li>
-          <li><strong>Beteiligungsfinanzierung (Eigenkapital):</strong> Ein neuer Gesellschafter/Investor steigt ein. Gibt frisches Geld, will aber Mitspracherecht/Rendite.</li>
-        </ul>
-      </li>
-    </ul>
-
-    <h4>3. Umsatzsteuer & Vorsteuerabzug</h4>
-    <ul>
-      <li>Als Unternehmen zahlst DU <code>Vorsteuern</code> beim Einkauf von Waren (z.B. Laptops).</li>
-      <li>Du schlägst deine eigene <code>Umsatzsteuer</code> auf den Rechnungspreis auf und fängst sie vom Endkunden ein (Mehrwertsteuer).</li>
-      <li>Ans Finanzamt zahlst du nur die Differenzfaktor (<code>Zahllast = Vereinnahmte Umsatzsteuer - Bezahlte Vorsteuer</code>). Die Steuer wird vom Endverbraucher getragen, für Unternehmen ist sie durchlaufender Posten.</li>
-    </ul>
-
-    <h4>4. Berechnung Kosten/Gewinn (KLR)</h4>
-    <ul>
-      <li><strong>Fixkosten (Kf):</strong> Miete Serverraum. Sind immer da, auch wenn du 0 Stück produzierst.</li>
-      <li><strong>Variable Kosten (Kv):</strong> Softwarelizenz pro User. Steigen proportional mit der Menge (x).</li>
-      <li>Gesamtkosten (K) = Kf + (Kv * x)</li>
-      <li><strong>Break-Even-Point (Gewinnschwelle):</strong> Der Punkt (Stückzahl), ab dem Umsatz genau den Gesamtkosten entspricht. Ab jetzt machst du Gewinn.</li>
-      <li>Formel: <code>Menge (x) = Fixkosten / (Stückpreis - Variable Stückkosten)</code></li>
-    </ul>
-  `,
-
-  '4.4': `
-    <h3>Nachhaltigkeit & Gesellschaft</h3>
-
-    <h4>1. Green IT & Umweltschutz</h4>
-    <p>Die IT hat einen enormen Strombedarf und erzeugt viel Elektroschrott.</p>
-    <ul>
-      <li><strong>Green-IT in The IT:</strong> Reduzierung des Energieverbrauchs in Rechenzentren (Virtualisierung, effiziente Kühlung).</li>
-      <li><strong>Green-IT by IT:</strong> Durch Software Ressourcen woanders sparen (z.B. Videokonferenz statt Flug).</li>
-      <li><strong>ElektroG (RoHS / WEEE):</strong> Rücknahme- und Entsorgungspflicht vom Hersteller für alte Server, Laptops (Sondermüll vermeiden).</li>
-    </ul>
-
-    <h4>2. Globalisierung</h4>
-    <ul>
-      <li><strong>Vorteile:</strong> Weltweite Teams, geringe Hardware-Kosten (Produktion Asien), weltweit Software deployen als SaaS. Neue Absatzmärkte.</li>
-      <li><strong>Nachteile:</strong> Wettbewerbsdruck, Abhängigkeit von Lieferketten (z.B. Chipmangel), unterschiedliche gesetzliche/kulturelle Hürden bei Teams (Timezones, Sprache).</li>
-    </ul>
-
-    <h4>3. Arbeitskräftewandel & Weiterbildung</h4>
-    <ul>
-      <li>Die IT altert schnell ("Halbwertszeit des Wissens ist kurz"). <strong>Lebenslanges Lernen (LLL)</strong> ist in der Anwendungsentwicklung elementar.</li>
-      <li>Gefahr der Automatisierung (KI), Notwendigkeit von Softskills und "Deep Work".</li>
-      <li>Arbeitgeber bietet Schulungen / Zertifizierungen.</li>
-    </ul>
-
-    <h4>4. Security-Awareness (Faktor Mensch)</h4>
-    <p>Social Engineering, Phishing, Schulungen. Die beste technische Firewall bringt nichts, wenn der Mensch davor manipuliert wird.</p>
+    '4.4': `
+<div class="space-y-8 pb-4">
+  <div class="bg-dark-card border border-dark-border rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400">
+        <i class="fa-solid fa-leaf"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-white m-0">Nachhaltigkeit & Gesellschaft</h3>
+        <p class="text-sm text-dark-muted m-0">Green-IT, Globalisierung und lebenslanges Lernen</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-earth-europe text-green-400 mr-2"></i>1. Green-IT & Umwelt</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Green-IT in/by IT</strong>
+          <p class="text-[10px] text-gray-400 m-0">"in": Effiziente RZs. "by": Durch IT Ressourcen sparen (Videocall statt Flug).</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-dark-warning">ElektroG (RoHS/WEEE)</strong>
+          <p class="text-[10px] text-gray-400 m-0">Rücknahme- & Entsorgungspflicht vom Hersteller für alte Hardware.</p>
+        </div>
+      </div>
+      <h4 class="text-lg font-bold text-white mb-2 mt-4"><i class="fa-solid fa-globe text-blue-400 mr-2"></i>2. Globalisierung</h4>
+      <p class="text-[10px] text-gray-400 m-0">
+        <strong class="text-dark-success">Pro:</strong> Weltweite Teams, billige HW, SaaS weltweit.<br>
+        <strong class="text-dark-danger">Contra:</strong> Preisdruck, Supply Chain Abhängigkeit, Sprach/Zeit-Hürden.
+      </p>
+    </div>
+    <div class="bg-dark-bg border border-dark-border rounded-xl p-5 fade-in">
+      <h4 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-user-graduate text-purple-400 mr-2"></i>3. Arbeitswelt & Mensch</h4>
+      <div class="space-y-3">
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Lebenslanges Lernen (LLL)</strong>
+          <p class="text-[10px] text-gray-400 m-0">IT altert extrem schnell (kurze Halbwertszeit). LLL ist elementar.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1">Arbeitskräfte Wandel</strong>
+          <p class="text-[10px] text-gray-400 m-0">Automatisierung (KI) bedroht einfache Jobs. Fokus auf Softskills & Deep Work.</p>
+        </div>
+        <div class="bg-dark-card p-3 rounded-lg border border-dark-border">
+          <strong class="text-sm text-white block mb-1 text-dark-danger">Faktor Mensch (Security)</strong>
+          <p class="text-[10px] text-gray-400 m-0">Social Engineering, Phishing. Die beste Firewall ist nutzlos bei Manipulation des Users (Awareness-Trainings nötig).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   `,
 };
