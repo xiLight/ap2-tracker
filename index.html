@@ -135,6 +135,22 @@
     </div>
   </div>
 
+  <!-- Pro Quiz Modal -->
+  <div id="proQuizModal" class="fixed inset-0 z-[120] hidden bg-dark-bg/95 backdrop-blur-xl overflow-y-auto no-print">
+    <div class="min-h-screen px-4 py-6 flex flex-col items-center justify-center relative w-full max-w-4xl mx-auto">
+
+      <!-- Close Button -->
+      <button onclick="app.closeProQuiz()"
+        class="absolute top-6 right-6 p-2 text-dark-muted hover:text-white transition-all bg-dark-card border border-dark-border hover:border-dark-accent rounded-xl w-12 h-12 flex items-center justify-center shadow-lg group z-10">
+        <i class="fa-solid fa-xmark text-xl text-dark-danger group-hover:rotate-90 transition-transform"></i>
+      </button>
+
+      <div class="w-full h-full flex flex-col gap-6" id="proQuizContainer">
+        <!-- Injected via app.js -->
+      </div>
+    </div>
+  </div>
+
   <!-- Navigation -->
   <nav class="glass-header sticky top-0 z-50 no-print">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -167,7 +183,6 @@
             </span>
           </div>
 
-          <!-- Update Bell -->
           <a href="updates.html" class="p-2 text-dark-muted hover:text-white transition-all relative group"
             title="Updates">
             <i class="fa-solid fa-bell group-hover:rotate-12 transition-transform"></i>
@@ -177,6 +192,13 @@
               <span class="relative inline-flex rounded-full h-2 w-2 bg-dark-accent"></span>
             </span>
           </a>
+
+          <!-- Pro Kompetenz Check -->
+          <button onclick="app.startProQuiz()"
+            class="p-2 text-emerald-400 hover:text-emerald-300 transition-colors ml-1"
+            title="Pro Kompetenz-Check starten">
+            <i class="fa-solid fa-graduation-cap text-lg"></i>
+          </button>
 
           <div class="h-6 w-px bg-dark-border mx-1 hidden sm:block"></div>
 

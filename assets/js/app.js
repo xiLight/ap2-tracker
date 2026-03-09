@@ -469,11 +469,22 @@ const app = {
           this.state[t.id].done = false;
           this.state[t.id].subDone = [];
           this.state[t.id].reps = [false, false, false];
+          this.state[t.id].quiz = []; // Also reset quizzes
         }
       });
       this.save();
       this.render();
     }
+  },
+
+  resetQuiz(topicId) {
+    if (!confirm('Bisherige Antworten für dieses Thema löschen und neu starten?')) return;
+    const s = this.getState(topicId);
+    s.quiz = [];
+    this.save();
+
+    // UI aktualisieren durch erneutes Öffnen des Modals
+    this.openCheatSheet(topicId);
   },
 
   // --- LEGAL / MODALS ---
@@ -524,17 +535,20 @@ const app = {
             <i class="fa-solid fa-clipboard-question text-lg"></i>
           </div>
           <div>
-            <h3 class="text-xl font-bold text-white m-0">Kompetenz-Check</h3>
+            <h3 class="text-xl font-bold text-white m-0">Speed Kompetenz Check</h3>
             <p class="text-xs text-dark-muted m-0">Teste dein Wissen zu diesem Thema</p>
           </div>
         </div>
         <div class="space-y-6">
     `;
 
+    let hasAnswered = false;
+
     questions.forEach((q, qIndex) => {
       // Check if question was already answered correctly or incorrectly
       const s = this.getState(topicId);
       const isAnswered = s.quiz && typeof s.quiz[qIndex] !== 'undefined';
+      if (isAnswered) hasAnswered = true;
       const wasCorrect = isAnswered && s.quiz[qIndex] === true;
       const wasIncorrect = isAnswered && s.quiz[qIndex] === false;
 
@@ -590,6 +604,19 @@ const app = {
 
     html += `
         </div>
+    `;
+
+    if (hasAnswered) {
+      html += `
+        <div class="mt-6 text-center">
+          <button onclick="app.resetQuiz('${topicId}')" class="text-sm border border-dark-border bg-dark-bg hover:bg-dark-card hover:border-dark-muted transition-colors text-dark-muted hover:text-white py-2 px-4 rounded-lg">
+            <i class="fa-solid fa-rotate-right mr-2"></i>Check wiederholen
+          </button>
+        </div>
+      `;
+    }
+
+    html += `
       </div>
     `;
     return html;
@@ -635,7 +662,7 @@ const app = {
 
     // Erklärung anzeigen
     expDiv.classList.remove('hidden');
-    expDiv.innerHTML = `<strong>Erklärung:</strong> <span class="text-gray-300">${explanation}</span>`;
+    expDiv.innerHTML = `< strong > Erklärung:</strong > <span class="text-gray-300">${explanation}</span>`;
 
     if (isCorrect) {
       expDiv.classList.add('bg-dark-success/10', 'border-dark-success', 'text-dark-success');
@@ -665,6 +692,286 @@ const app = {
     }
   },
 
+  // --- PRO QUIZ (FULLSCREEN) ---
+  currentProQuiz: [],
+  currentProIndex: 0,
+  proScore: 0,
+  proHintUsed: false,
+
+  startProQuiz() {
+    if (typeof quizzes === 'undefined') {
+      alert("Quiz-Daten konnten nicht geladen werden.");
+      return;
+    }
+
+    // Sammle alle Fragen
+    let allQuestions = [];
+    Object.keys(quizzes).forEach(topicId => {
+      quizzes[topicId].forEach((q, idx) => {
+        allQuestions.push({
+          ...q,
+          topicId: topicId,
+          originalIndex: idx
+        });
+      });
+    });
+
+    if (allQuestions.length === 0) return;
+
+    // Mischen (Fisher-Yates)
+    for (let i = allQuestions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+    }
+
+    // Max 10 Fragen
+    this.currentProQuiz = allQuestions.slice(0, 10);
+    this.currentProIndex = 0;
+    this.proScore = 0;
+    this.proHintUsed = false;
+
+    const modal = document.getElementById('proQuizModal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    this.renderProQuestion();
+  },
+
+  renderProQuestion() {
+    const container = document.getElementById('proQuizContainer');
+    if (!container) return;
+
+    if (this.currentProIndex >= this.currentProQuiz.length) {
+      this.finishProQuiz();
+      return;
+    }
+
+    const q = this.currentProQuiz[this.currentProIndex];
+    const total = this.currentProQuiz.length;
+    const progressPct = ((this.currentProIndex) / total) * 100;
+    this.proHintUsed = false;
+
+    let html = `
+      <!-- Progress Bar -->
+      <div class="w-full bg-dark-bg rounded-full h-2 mb-4 mt-8 max-w-2xl mx-auto border border-dark-border overflow-hidden">
+         <div class="bg-emerald-500 h-2 transition-all duration-500" style="width: ${progressPct}%"></div>
+      </div>
+
+      <div class="w-full max-w-2xl mx-auto bg-dark-card border border-dark-border shadow-[0_0_40px_rgba(16,185,129,0.15)] rounded-2xl p-8 md:p-12 relative flex flex-col flex-1 max-h-[80vh] overflow-y-auto">
+        
+        <div class="flex justify-between items-center mb-8">
+            <span class="text-sm font-bold text-dark-muted font-mono bg-dark-bg px-3 py-1 rounded-lg border border-dark-border tracking-widest uppercase">
+                Frage ${this.currentProIndex + 1} / ${total}
+            </span>
+            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-lg">
+                Score: ${this.proScore}
+            </span>
+        </div>
+
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 leading-tight">
+            ${q.question}
+        </h2>
+
+        <div class="space-y-4 mb-8" id="proQuizOptions">
+    `;
+
+    q.options.forEach((opt, idx) => {
+      html += `
+            <button onclick="app.handleProAnswer(this, ${q.correct}, ${idx})"
+                class="w-full text-left p-4 md:p-5 rounded-xl border border-dark-border bg-dark-bg hover:border-emerald-500/50 hover:bg-emerald-500/5 text-gray-300 text-base md:text-lg transition-all flex items-center justify-between group outline-none">
+                <span>${opt}</span>
+                <div class="w-6 h-6 rounded-full border-2 border-dark-border group-hover:border-emerald-500/50 flex items-center justify-center transition-colors"></div>
+            </button>
+        `;
+    });
+
+    html += `
+        </div>
+
+        <div class="mt-auto pt-6 border-t border-dark-border flex justify-between items-center">
+            <button onclick="app.showProHint()" id="proHintBtn" class="text-dark-warning hover:text-yellow-300 text-sm font-bold transition-colors flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-dark-warning/10">
+                <i class="fa-solid fa-lightbulb"></i> Tipp anzeigen (50/50)
+            </button>
+            
+            <button onclick="app.renderProQuestion()" id="proNextBtn" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-emerald-500/25 active:scale-95">
+                Nächste Frage <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+        
+        <div id="proExplanation" class="hidden mt-6 p-4 rounded-xl text-sm leading-relaxed border border-dark-border"></div>
+
+      </div>
+    `;
+
+    container.innerHTML = html;
+  },
+
+  handleProAnswer(btn, correctIdx, selectedIdx) {
+    const container = document.getElementById('proQuizOptions');
+    if (container.dataset.answered === 'true') return;
+    container.dataset.answered = 'true';
+
+    const allButtons = container.querySelectorAll('button');
+    const nextBtn = document.getElementById('proNextBtn');
+    const hintBtn = document.getElementById('proHintBtn');
+    const expDiv = document.getElementById('proExplanation');
+
+    const q = this.currentProQuiz[this.currentProIndex];
+    const isCorrect = correctIdx === selectedIdx;
+
+    if (isCorrect) this.proScore++;
+
+    if (hintBtn) {
+      hintBtn.classList.add('opacity-50', 'pointer-events-none');
+    }
+
+    allButtons.forEach((b, idx) => {
+      b.disabled = true;
+      b.classList.remove('hover:border-emerald-500/50', 'hover:bg-emerald-500/5', 'cursor-pointer');
+      const icon = b.querySelector('div');
+
+      if (idx === correctIdx) {
+        b.classList.remove('border-dark-border', 'bg-dark-bg', 'text-gray-300');
+        b.classList.add('border-emerald-500', 'bg-emerald-500/20', 'text-emerald-400', 'shadow-[0_0_15px_rgba(16,185,129,0.2)]');
+        icon.className = 'fa-solid fa-check text-emerald-400 text-xl';
+      } else if (idx === selectedIdx && !isCorrect) {
+        b.classList.remove('border-dark-border', 'bg-dark-bg', 'text-gray-300');
+        b.classList.add('border-red-500', 'bg-red-500/20', 'text-red-400');
+        icon.className = 'fa-solid fa-xmark text-red-400 text-xl';
+      } else {
+        b.style.opacity = '0.3';
+      }
+    });
+
+    // Erklärung
+    expDiv.classList.remove('hidden');
+    expDiv.innerHTML = `<strong>Erklärung:</strong> <span class="text-gray-300">${q.explanation}</span>`;
+
+    if (isCorrect) {
+      expDiv.classList.add('bg-emerald-500/10', 'border-emerald-500/50', 'text-emerald-400');
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#10B981', '#34D399', '#ffffff'],
+          disableForReducedMotion: true
+        });
+      }
+    } else {
+      expDiv.classList.add('bg-red-500/10', 'border-red-500/50', 'text-red-400');
+    }
+
+    nextBtn.classList.remove('hidden');
+    this.currentProIndex++;
+  },
+
+  showProHint() {
+    if (this.proHintUsed) return;
+    this.proHintUsed = true;
+
+    const q = this.currentProQuiz[this.currentProIndex];
+    const container = document.getElementById('proQuizOptions');
+    if (container.dataset.answered === 'true') return;
+
+    const hintBtn = document.getElementById('proHintBtn');
+    if (hintBtn) {
+      hintBtn.innerHTML = `<i class="fa-solid fa-book text-dark-muted"></i> Thematischer Kontext: Modul ${q.topicId}`;
+      hintBtn.classList.add('pointer-events-none', 'text-dark-muted');
+      hintBtn.classList.remove('text-dark-warning', 'hover:text-yellow-300', 'hover:bg-dark-warning/10');
+    }
+
+    // 50/50 Joker - Entferne 2 falsche Antworten
+    const allButtons = container.querySelectorAll('button');
+    let wrongIndices = [];
+    q.options.forEach((opt, idx) => {
+      if (idx !== q.correct) wrongIndices.push(idx);
+    });
+
+    // Mische falsche Indizes und nimm 2 (sofern es 4 Optionen gibt)
+    for (let i = wrongIndices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [wrongIndices[i], wrongIndices[j]] = [wrongIndices[j], wrongIndices[i]];
+    }
+
+    const toHide = wrongIndices.slice(0, Math.min(2, wrongIndices.length - 1));
+
+    toHide.forEach(idx => {
+      allButtons[idx].style.opacity = '0.2';
+      allButtons[idx].disabled = true;
+      allButtons[idx].classList.remove('hover:border-emerald-500/50', 'hover:bg-emerald-500/5');
+    });
+  },
+
+  finishProQuiz() {
+    const container = document.getElementById('proQuizContainer');
+    const total = this.currentProQuiz.length;
+    const pct = Math.round((this.proScore / total) * 100);
+
+    let message = "Gute Arbeit!";
+    let color = "text-emerald-400";
+    if (pct === 100) { message = "Perfekt! Du bist extrem gut vorbereitet."; color = "text-yellow-400"; }
+    else if (pct >= 80) message = "Sehr gut! Fast fehlerfrei.";
+    else if (pct >= 50) { message = "Guter Ansatz, aber da ist noch Luft nach oben."; color = "text-yellow-500"; }
+    else { message = "Puh... Da solltest du vielleicht nochmal die Lernzettel durchgehen."; color = "text-red-400"; }
+
+    container.innerHTML = `
+        <div class="w-full max-w-lg mx-auto bg-dark-card border border-dark-border shadow-[0_0_50px_rgba(16,185,129,0.2)] rounded-2xl p-10 text-center relative overflow-hidden fade-in">
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent pointer-events-none"></div>
+            
+            <i class="fa-solid fa-medal text-6xl ${color} mb-6 drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]"></i>
+            
+            <h2 class="text-3xl font-bold text-white mb-2">Quiz Beendet</h2>
+            <p class="text-dark-muted mb-8">${message}</p>
+            
+            <div class="flex justify-center items-end gap-2 mb-10 font-mono">
+                <span class="text-6xl font-bold ${color} leading-none">${this.proScore}</span>
+                <span class="text-2xl text-dark-muted mb-1">/ ${total}</span>
+            </div>
+            
+            <button onclick="app.closeProQuiz()" class="w-full bg-dark-bg border border-dark-border hover:border-emerald-500 text-white font-bold py-3 px-6 rounded-xl transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                Zurück zum Dashboard
+            </button>
+        </div>
+      `;
+
+    if (pct >= 50 && typeof confetti === 'function') {
+      const duration = 3000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ['#10B981', '#FBBF24']
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ['#10B981', '#FBBF24']
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+    }
+  },
+
+  closeProQuiz() {
+    const modal = document.getElementById('proQuizModal');
+    if (modal) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  },
+
   openLegal(type) {
     const modal = document.getElementById('legalModal');
     const content = document.getElementById('legalContent');
@@ -672,53 +979,53 @@ const app = {
 
     if (type === 'impressum') {
       content.innerHTML = `
-              <h1 class="text-2xl font-bold text-dark-accent mb-6">Impressum</h1>
-              <div class="space-y-4 text-dark-text">
-                <p><strong>Angaben gemäß § 5 TMG</strong></p>
-                <p>
-                  Christoph Willam<br />
-                  Tocklergasse 14<br />
-                  96129 Strullendorf
-                </p>
-                <h2 class="text-xl font-semibold mt-6 mb-2">Kontakt</h2>
-                <p>E-Mail: <a href="mailto:info@cwillam.de" class="text-dark-accent hover:underline">info@cwillam.de</a></p>
-                <h2 class="text-xl font-semibold mt-6 mb-2">Berufsbezeichnung</h2>
-                <p>Fachinformatiker für Anwendungsentwicklung</p>
-                <p class="text-xs text-dark-muted mt-8">Quelle: <a href="https://www.e-recht24.de" target="_blank" class="hover:underline">e-recht24.de</a></p>
-              </div>
-            `;
+  < h1 class="text-2xl font-bold text-dark-accent mb-6" > Impressum</h1 >
+    <div class="space-y-4 text-dark-text">
+      <p><strong>Angaben gemäß § 5 TMG</strong></p>
+      <p>
+        Christoph Willam<br />
+        Tocklergasse 14<br />
+        96129 Strullendorf
+      </p>
+      <h2 class="text-xl font-semibold mt-6 mb-2">Kontakt</h2>
+      <p>E-Mail: <a href="mailto:info@cwillam.de" class="text-dark-accent hover:underline">info@cwillam.de</a></p>
+      <h2 class="text-xl font-semibold mt-6 mb-2">Berufsbezeichnung</h2>
+      <p>Fachinformatiker für Anwendungsentwicklung</p>
+      <p class="text-xs text-dark-muted mt-8">Quelle: <a href="https://www.e-recht24.de" target="_blank" class="hover:underline">e-recht24.de</a></p>
+    </div>
+`;
     } else {
       content.innerHTML = `
-                <h1 class="text-2xl font-bold text-dark-accent mb-6">Datenschutz</h1>
-                <div class="space-y-4 text-dark-text text-sm">
+  < h1 class="text-2xl font-bold text-dark-accent mb-6" > Datenschutz</h1 >
+    <div class="space-y-4 text-dark-text text-sm">
 
-                  <h2 class="text-lg font-bold text-white">1. Grundlegendes</h2>
-                  <p>Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten innerhalb unseres Online-Angebotes auf.</p>
+      <h2 class="text-lg font-bold text-white">1. Grundlegendes</h2>
+      <p>Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten innerhalb unseres Online-Angebotes auf.</p>
 
-                  <h2 class="text-lg font-bold text-white mt-4">2. Hosting & Server-Logfiles (IONOS)</h2>
-                  <p>Wir hosten diese Website bei <strong>IONOS SE</strong> (Elgendorfer Str. 57, 56410 Montabaur). <br>
-                  Der Provider erhebt und speichert automatisch Informationen in so genannten Server-Logfiles, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
-                  <ul class="list-disc pl-5 text-dark-muted">
-                    <li>Browsertyp und Browserversion</li>
-                    <li>Verwendetes Betriebssystem</li>
-                    <li>Referrer URL</li>
-                    <li>Hostname des zugreifenden Rechners</li>
-                    <li>Uhrzeit der Serveranfrage</li>
-                    <li>IP-Adresse</li>
-                  </ul>
-                  <p>Diese Daten werden nicht mit anderen Datenquellen zusammengeführt. Die Erfassung dieser Daten erfolgt auf Grundlage von <strong>Art. 6 Abs. 1 lit. f DSGVO</strong>. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website – hierzu müssen die Server-Logfiles erfasst werden. Die Daten werden nach 7 Tagen automatisch gelöscht.</p>
+      <h2 class="text-lg font-bold text-white mt-4">2. Hosting & Server-Logfiles (IONOS)</h2>
+      <p>Wir hosten diese Website bei <strong>IONOS SE</strong> (Elgendorfer Str. 57, 56410 Montabaur). <br>
+        Der Provider erhebt und speichert automatisch Informationen in so genannten Server-Logfiles, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
+      <ul class="list-disc pl-5 text-dark-muted">
+        <li>Browsertyp und Browserversion</li>
+        <li>Verwendetes Betriebssystem</li>
+        <li>Referrer URL</li>
+        <li>Hostname des zugreifenden Rechners</li>
+        <li>Uhrzeit der Serveranfrage</li>
+        <li>IP-Adresse</li>
+      </ul>
+      <p>Diese Daten werden nicht mit anderen Datenquellen zusammengeführt. Die Erfassung dieser Daten erfolgt auf Grundlage von <strong>Art. 6 Abs. 1 lit. f DSGVO</strong>. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website – hierzu müssen die Server-Logfiles erfasst werden. Die Daten werden nach 7 Tagen automatisch gelöscht.</p>
 
-                  <h2 class="text-lg font-bold text-white mt-4">3. Lokale Speicherung (LocalStorage)</h2>
-                  <p>Diese Anwendung speichert Ihren Lernfortschritt (Status der Checkboxen, Timer-Einstellungen) ausschließlich lokal in Ihrem Browser ("LocalStorage").</p>
-                  <p><strong>Rechtsgrundlage:</strong> Die Speicherung ist für die Funktion der Website (Lern-Tracker) <strong>unbedingt erforderlich</strong> (gemäß § 25 Abs. 2 Nr. 2 TTDSG). Ohne diese Speicherung kann der Dienst "Fortschrittskontrolle" nicht erbracht werden. Es findet <strong>kein Tracking</strong>, keine Analyse und keine Weitergabe an Dritte statt. Die Daten verlassen Ihr Endgerät nicht.</p>
+      <h2 class="text-lg font-bold text-white mt-4">3. Lokale Speicherung (LocalStorage)</h2>
+      <p>Diese Anwendung speichert Ihren Lernfortschritt (Status der Checkboxen, Timer-Einstellungen) ausschließlich lokal in Ihrem Browser ("LocalStorage").</p>
+      <p><strong>Rechtsgrundlage:</strong> Die Speicherung ist für die Funktion der Website (Lern-Tracker) <strong>unbedingt erforderlich</strong> (gemäß § 25 Abs. 2 Nr. 2 TTDSG). Ohne diese Speicherung kann der Dienst "Fortschrittskontrolle" nicht erbracht werden. Es findet <strong>kein Tracking</strong>, keine Analyse und keine Weitergabe an Dritte statt. Die Daten verlassen Ihr Endgerät nicht.</p>
 
-                  <h2 class="text-lg font-bold text-white mt-4">4. Externe Dienste</h2>
-                  <p>Diese Website arbeitet <strong>autark</strong>. Es werden keine externen CDNs (Content Delivery Networks), keine Google Fonts und keine externen Analysetools (wie Google Analytics) eingesetzt. Alle Skripte und Ressourcen werden vom eigenen Server geladen.</p>
+      <h2 class="text-lg font-bold text-white mt-4">4. Externe Dienste</h2>
+      <p>Diese Website arbeitet <strong>autark</strong>. Es werden keine externen CDNs (Content Delivery Networks), keine Google Fonts und keine externen Analysetools (wie Google Analytics) eingesetzt. Alle Skripte und Ressourcen werden vom eigenen Server geladen.</p>
 
-                  <h2 class="text-lg font-bold text-white mt-4">5. Ihre Rechte</h2>
-                  <p>Bezüglich der Server-Logs haben Sie das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung. Da die Lerndaten nur auf Ihrem Gerät liegen, haben wir auf diese keinen Zugriff – Sie können diese Daten jederzeit selbst löschen, indem Sie den Browser-Cache leeren oder den "Reset"-Button in der App nutzen.</p>
-                </div>
-            `;
+      <h2 class="text-lg font-bold text-white mt-4">5. Ihre Rechte</h2>
+      <p>Bezüglich der Server-Logs haben Sie das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung. Da die Lerndaten nur auf Ihrem Gerät liegen, haben wir auf diese keinen Zugriff – Sie können diese Daten jederzeit selbst löschen, indem Sie den Browser-Cache leeren oder den "Reset"-Button in der App nutzen.</p>
+    </div>
+`;
     }
   },
 
