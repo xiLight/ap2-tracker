@@ -490,9 +490,13 @@ const app = {
       idEl.textContent = topic.id;
     }
 
-    const content = window.AP2_CONTENT ? window.AP2_CONTENT[topicId] : null;
+    let content = window.AP2_CONTENT ? window.AP2_CONTENT[topicId] : null;
 
     if (content) {
+      // Kompetenz-Check anfügen, falls vorhanden
+      if (typeof quizzes !== 'undefined' && quizzes[topicId]) {
+        content += this.renderQuiz(topicId);
+      }
       contentBox.innerHTML = content;
     } else {
       contentBox.innerHTML = `
@@ -506,6 +510,111 @@ const app = {
 
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+  },
+
+  renderQuiz(topicId) {
+    const questions = quizzes[topicId];
+    if (!questions || questions.length === 0) return '';
+
+    let html = `
+      <div class="mt-8 border-t border-dark-border pt-8 fade-in">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+            <i class="fa-solid fa-clipboard-question text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-white m-0">Kompetenz-Check</h3>
+            <p class="text-xs text-dark-muted m-0">Teste dein Wissen zu diesem Thema</p>
+          </div>
+        </div>
+        <div class="space-y-6">
+    `;
+
+    questions.forEach((q, qIndex) => {
+      html += `
+        <div class="quiz-question bg-dark-bg border border-dark-border rounded-xl p-5 shadow-sm">
+          <p class="text-sm font-bold text-white mb-4"><span class="text-dark-muted mr-2">Q${qIndex + 1}.</span>${q.question}</p>
+          <div class="space-y-2">
+      `;
+      q.options.forEach((opt, oIndex) => {
+        // Option HTML mit onClick Handler
+        html += `
+            <button 
+              onclick="app.handleQuizAnswer(this, ${q.correct}, ${oIndex}, \`${q.explanation.replace(/'/g, "\\'")}\`)"
+              class="w-full text-left p-3 rounded-lg border border-dark-border bg-dark-card hover:border-dark-muted text-gray-300 text-sm transition-all flex items-center justify-between group">
+              <span>${opt}</span>
+              <i class="fa-solid fa-circle text-dark-border group-hover:text-dark-muted text-xs transition-colors"></i>
+            </button>
+        `;
+      });
+      html += `
+          </div>
+          <div class="quiz-explanation hidden mt-4 p-3 rounded text-xs leading-relaxed border-l-2"></div>
+        </div>
+      `;
+    });
+
+    html += `
+        </div>
+      </div>
+    `;
+    return html;
+  },
+
+  handleQuizAnswer(btn, correctIdx, selectedIdx, explanation) {
+    const questionContainer = btn.closest('.quiz-question');
+    const allButtons = questionContainer.querySelectorAll('button');
+    const expDiv = questionContainer.querySelector('.quiz-explanation');
+
+    // Bereits geantwortet?
+    if (questionContainer.dataset.answered === 'true') return;
+    questionContainer.dataset.answered = 'true';
+
+    const isCorrect = correctIdx === selectedIdx;
+
+    allButtons.forEach((b, idx) => {
+      b.disabled = true;
+      b.classList.remove('hover:border-dark-muted', 'cursor-pointer');
+      const icon = b.querySelector('i');
+
+      if (idx === correctIdx) {
+        // Richtige Antwort immer grün markieren
+        b.classList.remove('border-dark-border', 'bg-dark-card', 'text-gray-300');
+        b.classList.add('border-dark-success', 'bg-dark-success/10', 'text-dark-success');
+        icon.className = 'fa-solid fa-circle-check text-dark-success text-base';
+      } else if (idx === selectedIdx && !isCorrect) {
+        // Falsch gewählte Antwort rot markieren
+        b.classList.remove('border-dark-border', 'bg-dark-card', 'text-gray-300');
+        b.classList.add('border-dark-danger', 'bg-dark-danger/10', 'text-dark-danger');
+        icon.className = 'fa-solid fa-circle-xmark text-dark-danger text-base';
+      } else {
+        // Rest ausgrauen
+        b.style.opacity = '0.5';
+      }
+    });
+
+    // Erklärung anzeigen
+    expDiv.classList.remove('hidden');
+    expDiv.innerHTML = `<strong>Erklärung:</strong> <span class="text-gray-300">${explanation}</span>`;
+
+    if (isCorrect) {
+      expDiv.classList.add('bg-dark-success/10', 'border-dark-success', 'text-dark-success');
+      // Konfetti auslösen, wenn richtig (leichtgewichtig)
+      if (typeof confetti === 'function') {
+        const rect = btn.getBoundingClientRect();
+        const x = (rect.left + rect.width / 2) / window.innerWidth;
+        const y = (rect.top + rect.height / 2) / window.innerHeight;
+        confetti({
+          particleCount: 40,
+          spread: 50,
+          origin: { x, y },
+          colors: ['#10B981', '#34D399', '#ffffff'],
+          disableForReducedMotion: true
+        });
+      }
+    } else {
+      expDiv.classList.add('bg-dark-danger/10', 'border-dark-danger', 'text-dark-danger');
+    }
   },
 
   closeCheatSheet() {
