@@ -111,6 +111,7 @@ const app = {
         stars: 0,
         reps: [false, false, false],
         last: null,
+        quiz: [] // Added for quiz results (true = correct, false = incorrect)
       };
     return this.state[id];
   },
@@ -531,25 +532,58 @@ const app = {
     `;
 
     questions.forEach((q, qIndex) => {
+      // Check if question was already answered correctly or incorrectly
+      const s = this.getState(topicId);
+      const isAnswered = s.quiz && typeof s.quiz[qIndex] !== 'undefined';
+      const wasCorrect = isAnswered && s.quiz[qIndex] === true;
+      const wasIncorrect = isAnswered && s.quiz[qIndex] === false;
+
       html += `
-        <div class="quiz-question bg-dark-bg border border-dark-border rounded-xl p-5 shadow-sm">
+        <div class="quiz-question bg-dark-bg border border-dark-border rounded-xl p-5 shadow-sm" data-answered="${isAnswered ? 'true' : 'false'}">
           <p class="text-sm font-bold text-white mb-4"><span class="text-dark-muted mr-2">Q${qIndex + 1}.</span>${q.question}</p>
           <div class="space-y-2">
       `;
       q.options.forEach((opt, oIndex) => {
-        // Option HTML mit onClick Handler
+
+        let btnClasses = "border-dark-border bg-dark-card hover:border-dark-muted text-gray-300";
+        let iconClass = "fa-solid fa-circle text-dark-border group-hover:text-dark-muted";
+        let disabled = isAnswered ? "disabled style='opacity: 0.5; cursor: default;'" : "";
+        let onclick = isAnswered ? "" : `onclick="app.handleQuizAnswer(this, '${topicId}', ${qIndex}, ${q.correct}, ${oIndex}, \`${q.explanation.replace(/'/g, "\\'")}\`)"`;
+
+        // Style restored state
+        if (isAnswered) {
+          btnClasses = btnClasses.replace('hover:border-dark-muted', '');
+          if (oIndex === q.correct) {
+            btnClasses = "border-dark-success bg-dark-success/10 text-dark-success";
+            iconClass = "fa-solid fa-circle-check text-dark-success text-base";
+            disabled = "disabled";
+          } else if (wasIncorrect && (!q.selected || q.selected === oIndex)) {
+            // We don't store EXACTLY which wrong answer they picked right now in simple mode,
+            // so in restored state, we just show the correct one as green and the rest faded.
+          }
+        }
+
         html += `
             <button 
-              onclick="app.handleQuizAnswer(this, ${q.correct}, ${oIndex}, \`${q.explanation.replace(/'/g, "\\'")}\`)"
-              class="w-full text-left p-3 rounded-lg border border-dark-border bg-dark-card hover:border-dark-muted text-gray-300 text-sm transition-all flex items-center justify-between group">
+              ${onclick}
+              ${disabled}
+              class="w-full text-left p-3 rounded-lg border ${btnClasses} text-sm transition-all flex items-center justify-between group">
               <span>${opt}</span>
-              <i class="fa-solid fa-circle text-dark-border group-hover:text-dark-muted text-xs transition-colors"></i>
+              <i class="${iconClass} text-xs transition-colors"></i>
             </button>
         `;
       });
+
+      let expClasses = "hidden";
+      if (isAnswered) {
+        expClasses = wasCorrect ? "bg-dark-success/10 border-dark-success text-dark-success" : "bg-dark-danger/10 border-dark-danger text-dark-danger";
+      }
+
       html += `
           </div>
-          <div class="quiz-explanation hidden mt-4 p-3 rounded text-xs leading-relaxed border-l-2"></div>
+          <div class="quiz-explanation ${expClasses} mt-4 p-3 rounded text-xs leading-relaxed border-l-2">
+            ${isAnswered ? `<strong>Erklärung:</strong> <span class="text-gray-300">${q.explanation}</span>` : ''}
+          </div>
         </div>
       `;
     });
@@ -561,7 +595,7 @@ const app = {
     return html;
   },
 
-  handleQuizAnswer(btn, correctIdx, selectedIdx, explanation) {
+  handleQuizAnswer(btn, topicId, qIndex, correctIdx, selectedIdx, explanation) {
     const questionContainer = btn.closest('.quiz-question');
     const allButtons = questionContainer.querySelectorAll('button');
     const expDiv = questionContainer.querySelector('.quiz-explanation');
@@ -571,6 +605,12 @@ const app = {
     questionContainer.dataset.answered = 'true';
 
     const isCorrect = correctIdx === selectedIdx;
+
+    // Speichern im State
+    const s = this.getState(topicId);
+    if (!s.quiz) s.quiz = [];
+    s.quiz[qIndex] = isCorrect;
+    this.save(); // save() calls updateStats()
 
     allButtons.forEach((b, idx) => {
       b.disabled = true;
@@ -735,6 +775,30 @@ const app = {
     if (rankBar) {
       rankBar.style.width = rankPct + '%';
       rankBar.style.backgroundColor = currentRank.color;
+    }
+
+    // --- Quiz Stats ---
+    let totalQuizzes = 0;
+    let correctQuizzes = 0;
+
+    if (typeof quizzes !== 'undefined') {
+      all.forEach(t => {
+        if (quizzes[t.id]) {
+          totalQuizzes += quizzes[t.id].length;
+
+          const s = this.getState(t.id);
+          if (s.quiz && s.quiz.length > 0) {
+            s.quiz.forEach(result => {
+              if (result === true) correctQuizzes++;
+            });
+          }
+        }
+      });
+    }
+
+    const quizTopEl = document.getElementById('quizScoreTop');
+    if (quizTopEl) {
+      quizTopEl.textContent = `${correctQuizzes}/${totalQuizzes}`;
     }
 
     let best = null,
